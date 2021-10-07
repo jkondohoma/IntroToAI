@@ -6,7 +6,7 @@ public class City implements Comparable<City> {
 
 	private String name;
 	private HashMap<String, Integer> neighboors;
-	private String color;
+	private boolean visited;
 
 	private int h;
 
@@ -14,6 +14,7 @@ public class City implements Comparable<City> {
 		this.name = name;
 		this.neighboors = neighboors;
 		this.h = h;
+		this.visited = false;
 	}
 	
 
@@ -29,20 +30,22 @@ public class City implements Comparable<City> {
 		return h;
 	}
 	
-	public String getColor() {
-		return color;
+	public boolean getVisisted() {
+		return visited;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setColor(boolean visited) {
+		this.visited = visited;
 	}
 
 	
 
+
 	@Override
 	public String toString() {
-		return "City [name=" + name + ", neighboors=" + neighboors + ", color=" + color + ", h=" + h + "]";
+		return "City [name=" + name + ", neighboors=" + neighboors + ", visited=" + visited + ", h=" + h + "]";
 	}
+
 
 	@Override
 	public int compareTo(City city) {

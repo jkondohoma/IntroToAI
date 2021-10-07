@@ -116,7 +116,7 @@ public class RomanianHolidayUtilities {
 	}
 
 	/**
-	 * given a possible path (fringe) and it to our frontier cost is straight line
+	 * given a possible path (fringe) and it to our frontier, cost is straight line
 	 * distance
 	 * 
 	 * @param fringe
@@ -132,6 +132,29 @@ public class RomanianHolidayUtilities {
 
 			int cost = getCityFromList(list.get(list.size() - 1)).getH();
 			newFrontier.put(list, cost);
+		}
+
+		return newFrontier;
+
+	}
+	
+	/**
+	 * given a possible path (fringe) and it to our frontier, cost is h(n) + g(n)
+	 * 
+	 * @param fringe
+	 * @param frontier
+	 * @return
+	 */
+	public static HashMap<ArrayList<String>, Integer> addToFrontierStarSearch(ArrayList<ArrayList<String>> fringe,
+			HashMap<ArrayList<String>, Integer> frontier) {
+
+		HashMap<ArrayList<String>, Integer> newFrontier = new HashMap<ArrayList<String>, Integer>(frontier);
+
+		for (ArrayList<String> list : fringe) {
+
+			int gn = pathCost(list);
+			int hn = getCityFromList(list.get(list.size() - 1)).getH();
+			newFrontier.put(list, (gn+hn));
 		}
 
 		return newFrontier;
@@ -156,6 +179,29 @@ public class RomanianHolidayUtilities {
 		ArrayList<ArrayList<String>> fringe = generateFringe(neighbors, least);
 
 		newFrontier = addToFrontierGreedyBestFirst(fringe, frontier);
+
+		newFrontier.remove(least);
+
+		return newFrontier;
+	}
+	
+	/**
+	 * given node to expand, least cost path and our current frontier get neighbors
+	 * of node "to expand" and add those to our frontier cost h(n) + g(n)
+	 * 
+	 * @param toExpand
+	 * @param least
+	 * @param frontier
+	 * @return
+	 */
+	public static HashMap<ArrayList<String>, Integer> expandStarSearch(String toExpand, ArrayList<String> least,
+			HashMap<ArrayList<String>, Integer> frontier) {
+		HashMap<ArrayList<String>, Integer> newFrontier = new HashMap<ArrayList<String>, Integer>();
+
+		HashMap<String, Integer> neighbors = allCitiesHash.get(toExpand);
+		ArrayList<ArrayList<String>> fringe = generateFringe(neighbors, least);
+
+		newFrontier = addToFrontierStarSearch(fringe, frontier);
 
 		newFrontier.remove(least);
 

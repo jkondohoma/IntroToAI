@@ -20,7 +20,7 @@ import java.util.Queue;
  *
  */
 
-public class RomanianHoliday {
+public class RomanianHolidayTree {
 
 	private final static ArrayList<City> allCities = FileParser.getCities();
 	private final static HashMap<String, HashMap<String, Integer>> allCitiesHash = FileParser.getCitiesHash(allCities);
@@ -202,78 +202,78 @@ public class RomanianHoliday {
 	 */
 	public static ArrayList<String> aStarBestFirstSearch(String root) {
 
+		ArrayList<String> finalPath = new ArrayList<String>();
 		ArrayList<String> runInformation = new ArrayList<String>();
-		ArrayList<String> path = new ArrayList<String>();
-		String currentNode = root;
-		path.add(currentNode);
 
-		int cost = 0;
+		String currNode = RomanianHolidayUtilities.getCityFromList(root).getName();
 
-		System.out.printf("%s | %-30s | %s \n", "Location", "Choices", "Choice");
-		System.out.println("_________________________________________________________________");
+		HashMap<ArrayList<String>, Integer> frontier = new HashMap<ArrayList<String>, Integer>();
+		// add first node of where we're at
+		ArrayList<String> pathChoice = new ArrayList<String>();
+		pathChoice.add(currNode);
+		HashMap<String, Integer> neighbors = allCitiesHash.get(currNode);
 
-		System.out.printf("%-8s %s | %s |  %-7s | %s |\n", currentNode, "Towards", "g(n)", "h(n)", "f(n)");
+//		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
+//		System.out.println("_________________________________________________________________");
+
+		ArrayList<ArrayList<String>> fringe = RomanianHolidayUtilities.generateFringe(neighbors, pathChoice);
+		frontier = RomanianHolidayUtilities.addToFrontierStarSearch(fringe, frontier);
+
 		int runs = 0;
 
-		Instant startTime = Instant.now();
-		while (!currentNode.equals(goal) && runs < 7) {
-			HashMap<String, Integer> neighbors = allCitiesHash.get(currentNode);
+		if (!root.equals(goal)) {
+			Instant startTime = Instant.now();
+			while (!currNode.equals(goal)) {
 
-//			System.out.println(neighbors);
-			HashMap<String, Integer> choices = new HashMap<String, Integer>();
-			ArrayList<String> currentPath = new ArrayList<String>(path);
+//				System.out.printf("%s \n", currNode);
 
-			for (Entry<String, Integer> entry : neighbors.entrySet()) {
+				for (Entry<ArrayList<String>, Integer> entry : frontier.entrySet()) {
+					ArrayList<String> path = entry.getKey();
+					int cost = entry.getValue();
+//					System.out.printf("\t%-80s %d\n", path, cost);
 
-				String neighbor = entry.getKey();
-				int distance = entry.getValue();
-				ArrayList<String> pathChoice = new ArrayList<String>(currentPath);
+				}
 
-				pathChoice.add(neighbor);
-//				System.out.println(pathChoice);
-				int gn = RomanianHolidayUtilities.pathCost(pathChoice);
+				// find least cost fringe in frontier
+				ArrayList<String> least = RomanianHolidayUtilities.leastCostFrontier(frontier);
+//				System.out.println("\t\t\tEXPAND: " + least);
 
-				int hn = RomanianHolidayUtilities.getCityFromList(neighbor).getH();
-				int fn = gn + hn;
+				// expand that fringe
+				currNode = least.get(least.size() - 1);
+				frontier = new HashMap<ArrayList<String>, Integer>(RomanianHolidayUtilities.expandStarSearch(currNode, least, frontier));
 
-//				System.out.println("\n" + neighbor);
+//				System.out.println("_________________________________________________________________");
+				runs++;
+//				System.out.println(runs);
 
-				choices.put(neighbor, fn);
-
-				System.out.printf("%17s| %-4d |  %-7d | %-4d |\n", neighbor, gn, hn, fn);
-
-//				pathSofar = temp;
+				if (currNode.equals(goal)) {
+					finalPath = new ArrayList<String>(least);
+//					System.out.println("\t\t\tDESTINATION REACHED! cost: " + RomanianHolidayUtilities.pathCost(least));
+				}
 			}
+			Instant endTime = Instant.now();
+			Duration searchTime = Duration.between(startTime, endTime);
 
-//			System.out.println(choices);
-			String choice = RomanianHolidayUtilities.leastCost(choices);
-			currentNode = choice;
-			path.add(choice);
-//			System.out.println(pathSofar.toString());
+			int nodes = finalPath.size();
 
-			cost = RomanianHolidayUtilities.pathCost(path);
+			runInformation.add(root);
+			runInformation.add(Integer.toString(nodes));
+			runInformation.add(finalPath.toString());
+			runInformation.add(Integer.toString(RomanianHolidayUtilities.pathCost(finalPath)));
+			runInformation.add(Integer.toString(searchTime.getNano()));
+		} else {
+			
+			finalPath.add(root);
+			runInformation.add(root);
+			runInformation.add("1");
+			runInformation.add(finalPath.toString());
+			runInformation.add(Integer.toString(RomanianHolidayUtilities.pathCost(finalPath)));
+			runInformation.add("0");
 
-			neighbors = allCitiesHash.get(currentNode);
-			System.out.printf("%60s\n", choice);
-			System.out.println("_________________________________________________________________");
-			System.out.printf("%s\n", choice);
-
-			runs++;
+//			System.out.println(runInformation);
 
 		}
-		Instant endTime = Instant.now();
-		Duration searchTime = Duration.between(startTime, endTime);
 
-		int nodes = path.size();
-		if (currentNode.equals(goal)) {
-			System.out.println("\t\t\tDESTINATION REACHED! cost: " + cost);
-		}
-
-		runInformation.add(root);
-		runInformation.add(Integer.toString(nodes));
-		runInformation.add(path.toString());
-		runInformation.add(Integer.toString(cost));
-		runInformation.add(Integer.toString(searchTime.getNano()));
 		return runInformation;
 
 	}
