@@ -7,25 +7,27 @@ public class Problem4 {
 
 	public static void main(String[] args) {
 
-		ArrayList<String> cities = RomanianHoliday.allCitiesFromList();
+		ArrayList<String> cities = RomanianHolidayUtilities.allCitiesFromList();
 		Collections.sort(cities);
 
-//		System.out.println(
-//				"________________________________________________________________________________________________________________________________________________________");
-//		System.out.printf("%65s\n", "Uninformed Breadth First Search");
-//		System.out.println(
-//				"________________________________________________________________________________________________________________________________________________________");
-//		System.out.printf("%15s | %11s | \t\t\t%-45s | %s | %s\n", "City Name", "#nodes visited", "Path to Bucharest",
-//				"Total cost of path", "CPU time");
-//		System.out.println(
-//				"________________________________________________________________________________________________________________________________________________________");
-//		
-//		for (int i = 0; i < cities.size(); i++) {
-//			ArrayList<String> runInfo = RomanianHoliday.uniformCostSearch(cities.get(i));
-//
-//			displayRunInformation(runInfo);
-//
-//		}
+		System.out.println(
+				"________________________________________________________________________________________________________________________________________________________");
+		System.out.printf("%65s\n", "Uninformed Breadth First Search");
+		System.out.println(
+				"________________________________________________________________________________________________________________________________________________________");
+		System.out.printf("%15s | %11s | \t\t\t%-45s | %s | %s\n", "City Name", "#nodes visited", "Path to Bucharest",
+				"Total cost of path", "CPU time");
+		System.out.println(
+				"________________________________________________________________________________________________________________________________________________________");
+		
+		for (int i = 0; i < cities.size(); i++) {
+			ArrayList<String> runInfo = RomanianHoliday.uniformCostSearch(cities.get(i));
+
+			displayRunInformation(runInfo);
+
+		}
+		
+		System.out.println("\n\n");
 
 		System.out.println(
 				"________________________________________________________________________________________________________________________________________________________");
@@ -36,12 +38,12 @@ public class Problem4 {
 				"Total cost of path", "CPU time");
 		System.out.println(
 				"________________________________________________________________________________________________________________________________________________________");
-//		for (int i = 0; i < cities.size(); i++) {
-			ArrayList<String> runInfo = RomanianHoliday.greedyBestFirstearch(cities.get(1));
+		for (int i = 0; i < cities.size(); i++) {
+			ArrayList<String> runInfo = RomanianHoliday.greedyBestFirstSearch(cities.get(i));
 
-//			displayRunInformation(runInfo);
+			displayRunInformation(runInfo);
 
-//		}
+		}
 
 //		System.out.println(
 //				"____________________________________________________________________________________________________________________________");
