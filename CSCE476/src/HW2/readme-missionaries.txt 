@@ -1,0 +1,47 @@
+Jaelle Kondohoma
+CSCE 476 HW 2
+Part 2: Missionaries & Cannibals puzzle
+
+Data structures: 
+------------------------------------------
+ArrayList<String> steps: stored possible steps taken to move cannibals and missionaries from one shore to the other
+ArrayList<String> validSteps: stored the right sequences of scenarios with a valid solution
+int missLeft: stores the number of missionaries on the left shore 
+int canLeft: stores the number of cannibals on the left shore 
+int missBoat: stores the number of missionaries on the boat
+int canBoat:  stores the number of cannibals on the boat
+int missRight: stores the number of missionaries on the right shore 
+int canRight: stores the number of cannibals on the right shore
+int boatLoc: stores location of the boat (0 for right, 1 for left)
+
+Functions (located in Missionaries.java):
+--------------------------------------------
+*  possible(int missLeft, int canLeft, int missBoat, int canBoat, int missRight, int canRight, int boatLoc, ArrayList<String> steps, ArrayList<String> validSteps):
+	returns true if current scenario is possible
+	
+* invalidVariables(int missLeft, int canLeft, int missBoat, int canBoat, int missRight, int canRight, int boatLoc):
+	returns true if any of the variables are not possibles (i.e. more than 3 missionaries or more than 3 cannibals, limit on boat exceeded)
+	
+* solution(int missLeft, int canLeft, int missBoat, int canBoat, int missRight, int canRight,int boatLoc)
+	 returns true for a valid scenario (i.e. boat cannot cross the river with no one on board, cannibals on either bank cannot out number the missionaries on that bank)
+	 
+* repeatedScenario(String scene, ArrayList<String> steps): 
+	returns true current scenarion has been run trough before
+
+
+Algorithm:
+----------------------------------------------
+starts with everyone on the left shore and pass these conditions to possible()
+
+* if solution() is true return true
+* if this scenario was done before return false
+* if variables are invalid return false
+* else recursively run the program until we reach the end where everyone is on the opposite shore
+
+
+
+steps required to compile and run the program:
+----------------------------------------------
+Main function is in Missionaries.java
+can be run from the command line using "javac Missionaries.Java",or can be run in any java IDE such as eclipe or IntelliJ
+package name will need to be changed to whichever default package you create if you make a different java project
