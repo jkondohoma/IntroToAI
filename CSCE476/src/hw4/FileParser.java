@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Map.Entry;
 
 public class FileParser {
 
@@ -65,20 +66,58 @@ public class FileParser {
 		return neighboors;
 
 	}
-/**
- * All cities hash table
- * @return
- */
+
+	/**
+	 * All cities hash table
+	 * 
+	 * @return
+	 */
 	public static HashMap<String, HashMap<String, Integer>> getCitiesHash(ArrayList<City> cities) {
-	
+
 		HashMap<String, HashMap<String, Integer>> allCitiesHash = new HashMap<String, HashMap<String, Integer>>();
-		
-		for (City city: cities) {
+
+		for (City city : cities) {
 			allCitiesHash.put(city.getName(), city.getNeighboors());
 		}
 		return allCitiesHash;
 	}
 
+	public static HashMap<City, HashMap<City, Integer>> getCitiesHashObject(ArrayList<City> cities) {
+		HashMap<City, HashMap<City, Integer>> allCitiesHash = new HashMap<City, HashMap<City, Integer>>();
+
+		for (City city : cities) {
+			allCitiesHash.put(city, getNeighboors(city));
+		}
+		return allCitiesHash;
+	}
+
+	private static HashMap<City, Integer> getNeighboors(City city) {
+		HashMap<City, Integer> allCitiesHash = new HashMap<City, Integer>();
+		
+		ArrayList<City> cities = getCities();
+		HashMap<String, Integer> neighbors = getCitiesHash(cities).get(city.getName());
+		
+		for (Entry<String, Integer> entry : neighbors.entrySet()) {
+			City cte = getCityFromList(entry.getKey(),cities);
+			allCitiesHash.put(cte, entry.getValue());
+			
+		}
+		
+		return allCitiesHash;
+	}
+	public static City getCityFromList(String input, ArrayList<City> allCities) {
+
+		City structure = null;
+		for (City city : allCities) {
+			if (city.getName().equals(input)) {
+				structure = city;
+
+			}
+		}
+
+		return structure;
+
+	}
 //	/**
 //	 * Get all locations on a map
 //	 * @param cities

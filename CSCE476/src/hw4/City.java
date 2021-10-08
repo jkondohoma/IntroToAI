@@ -34,16 +34,26 @@ public class City implements Comparable<City> {
 		return visited;
 	}
 
-	public void setColor(boolean visited) {
+	public void setVisited(boolean visited) {
 		this.visited = visited;
 	}
 
 	
 
 
+//	@Override
+//	public String toString() {
+//		return "City [name=" + name + ", neighboors=" + neighboors + ", visited=" + visited + ", h=" + h + "]";
+//	}
+
+//	@Override
+//	public String toString() {
+//		return name+": "+ visited;
+//	}
+	
 	@Override
 	public String toString() {
-		return "City [name=" + name + ", neighboors=" + neighboors + ", visited=" + visited + ", h=" + h + "]";
+		return name;
 	}
 
 
