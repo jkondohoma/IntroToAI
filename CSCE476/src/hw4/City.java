@@ -2,6 +2,13 @@ package hw4;
 
 import java.util.HashMap;
 
+/**
+ * data structure for a city
+ * 
+ * @author jaellekondohoma
+ *
+ */
+
 public class City implements Comparable<City> {
 
 	private String name;
@@ -16,7 +23,6 @@ public class City implements Comparable<City> {
 		this.h = h;
 		this.visited = false;
 	}
-	
 
 	public String getName() {
 		return name;
@@ -29,7 +35,7 @@ public class City implements Comparable<City> {
 	public int getH() {
 		return h;
 	}
-	
+
 	public boolean getVisisted() {
 		return visited;
 	}
@@ -37,9 +43,6 @@ public class City implements Comparable<City> {
 	public void setVisited(boolean visited) {
 		this.visited = visited;
 	}
-
-	
-
 
 //	@Override
 //	public String toString() {
@@ -50,12 +53,11 @@ public class City implements Comparable<City> {
 //	public String toString() {
 //		return name+": "+ visited;
 //	}
-	
+
 	@Override
 	public String toString() {
 		return name;
 	}
-
 
 	@Override
 	public int compareTo(City city) {
@@ -63,7 +65,5 @@ public class City implements Comparable<City> {
 		return name.compareTo(city.getName());
 
 	}
-
-	
 
 }
