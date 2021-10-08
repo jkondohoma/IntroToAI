@@ -50,7 +50,7 @@ public class RomanianHolidayGraph {
 		ArrayList<ArrayList<City>> fringe = RomaninaHolidayUtilities.generateFringeG(neighbors, pathChoice);
 		frontier = utils.addToFrontierStarSearchG(fringe, frontier);
 
-		int runs = 0;
+		int nodes = 1;
 
 		if (!root.equals(goal)) {
 
@@ -77,7 +77,7 @@ public class RomanianHolidayGraph {
 						utils.expandStarSearch(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
-				runs++;
+				nodes++;
 //				System.out.println(runs);
 
 				if (currNode.getName().equals(goal)) {
@@ -87,8 +87,6 @@ public class RomanianHolidayGraph {
 			}
 			Instant endTime = Instant.now();
 			Duration searchTime = Duration.between(startTime, endTime);
-
-			int nodes = finalPath.size();
 
 			runInformation.add(root);
 			runInformation.add(Integer.toString(nodes));
@@ -139,7 +137,7 @@ public class RomanianHolidayGraph {
 		ArrayList<ArrayList<City>> fringe = RomaninaHolidayUtilities.generateFringeG(neighbors, pathChoice);
 		frontier = utils.addToFrontierGreedyBestFirstG(fringe, frontier);
 
-		int runs = 0;
+		int nodes = 1;
 
 		if (!root.equals(goal)) {
 
@@ -166,7 +164,7 @@ public class RomanianHolidayGraph {
 						utils.expandGreedyBestFirst(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
-				runs++;
+				nodes++;
 //				System.out.println(runs);
 
 				if (currNode.getName().equals(goal)) {
@@ -176,8 +174,6 @@ public class RomanianHolidayGraph {
 			}
 			Instant endTime = Instant.now();
 			Duration searchTime = Duration.between(startTime, endTime);
-
-			int nodes = finalPath.size();
 
 			runInformation.add(root);
 			runInformation.add(Integer.toString(nodes));
@@ -232,7 +228,7 @@ public class RomanianHolidayGraph {
 		ArrayList<ArrayList<City>> fringe = RomaninaHolidayUtilities.generateFringeG(neighbors, pathChoice);
 		frontier = utils.addToFrontierG(fringe, frontier);
 
-		int runs = 0;
+		int nodes = 1;
 
 		if (!root.equals(goal)) {
 
@@ -259,7 +255,7 @@ public class RomanianHolidayGraph {
 						utils.expand(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
-				runs++;
+				nodes++;
 //				System.out.println(runs);
 
 				if (currNode.getName().equals(goal)) {
@@ -269,9 +265,6 @@ public class RomanianHolidayGraph {
 			}
 			Instant endTime = Instant.now();
 			Duration searchTime = Duration.between(startTime, endTime);
-
-			int nodes = finalPath.size();
-
 			runInformation.add(root);
 			runInformation.add(Integer.toString(nodes));
 			runInformation.add(finalPath.toString());

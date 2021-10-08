@@ -52,7 +52,7 @@ public class RomanianHolidayTree {
 		ArrayList<ArrayList<String>> fringe = RomaninaHolidayUtilities.generateFringe(neighbors, pathChoice);
 		frontier = RomaninaHolidayUtilities.addToFrontier(fringe, frontier);
 
-		int runs = 0;
+		int nodes = 1;
 
 		if (!root.equals(goal)) {
 			Instant startTime = Instant.now();
@@ -77,7 +77,7 @@ public class RomanianHolidayTree {
 						RomaninaHolidayUtilities.expand(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
-				runs++;
+				nodes++;
 //				System.out.println(runs);
 
 				if (currNode.equals(goal)) {
@@ -87,8 +87,6 @@ public class RomanianHolidayTree {
 			}
 			Instant endTime = Instant.now();
 			Duration searchTime = Duration.between(startTime, endTime);
-
-			int nodes = finalPath.size();
 
 			runInformation.add(root);
 			runInformation.add(Integer.toString(nodes));
@@ -136,7 +134,7 @@ public class RomanianHolidayTree {
 		ArrayList<ArrayList<String>> fringe = RomaninaHolidayUtilities.generateFringe(neighbors, pathChoice);
 		frontier = RomaninaHolidayUtilities.addToFrontierGreedyBestFirst(fringe, frontier);
 
-		int runs = 0;
+		int nodes = 1;
 
 		if (!root.equals(goal)) {
 			Instant startTime = Instant.now();
@@ -161,7 +159,7 @@ public class RomanianHolidayTree {
 						RomaninaHolidayUtilities.expandGreedyBestFirst(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
-				runs++;
+				nodes++;
 //				System.out.println(runs);
 
 				if (currNode.equals(goal)) {
@@ -172,7 +170,6 @@ public class RomanianHolidayTree {
 			Instant endTime = Instant.now();
 			Duration searchTime = Duration.between(startTime, endTime);
 
-			int nodes = finalPath.size();
 
 			runInformation.add(root);
 			runInformation.add(Integer.toString(nodes));
@@ -221,7 +218,7 @@ public class RomanianHolidayTree {
 		ArrayList<ArrayList<String>> fringe = RomaninaHolidayUtilities.generateFringe(neighbors, pathChoice);
 		frontier = RomaninaHolidayUtilities.addToFrontierStarSearch(fringe, frontier);
 
-		int runs = 0;
+		int nodes = 1;
 
 		if (!root.equals(goal)) {
 			Instant startTime = Instant.now();
@@ -246,7 +243,7 @@ public class RomanianHolidayTree {
 						RomaninaHolidayUtilities.expandStarSearch(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
-				runs++;
+				nodes++;
 //				System.out.println(runs);
 
 				if (currNode.equals(goal)) {
@@ -256,8 +253,6 @@ public class RomanianHolidayTree {
 			}
 			Instant endTime = Instant.now();
 			Duration searchTime = Duration.between(startTime, endTime);
-
-			int nodes = finalPath.size();
 
 			runInformation.add(root);
 			runInformation.add(Integer.toString(nodes));
