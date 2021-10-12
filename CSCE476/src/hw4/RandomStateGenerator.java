@@ -24,21 +24,22 @@ public class RandomStateGenerator {
 
 	/**
 	 * Randomly generates a start and end state of a eight piece puzzle
+	 * 
 	 * @return
 	 */
-	public static HashMap<int[][], int[][]> getStates() {
-		HashMap<int[][], int[][]> states = new HashMap<int[][], int[][]>();
+	public static HashMap<Puzzle, Puzzle> getStates() {
+		HashMap<Puzzle, Puzzle> states = new HashMap<Puzzle, Puzzle>();
 		int startCombo = combinationID[new Random().nextInt(combinationID.length)];
 
-		int[][] start = randomState(startCombo);
+		Puzzle start = randomState(startCombo);
 
-		int endCombo = startCombo + 2;
+		int endCombo = startCombo + 1;
 
 		if (endCombo > combinationID.length) {
 			endCombo = 1;
 		}
 
-		int[][] end = randomState(endCombo);
+		Puzzle end = randomState(endCombo);
 
 		states.put(start, end);
 
@@ -47,22 +48,22 @@ public class RandomStateGenerator {
 	}
 
 	/**
-	 * given a combination ID generate a random puzzle with numbers that
-	 * corresponds to that ID
+	 * given a combination ID generate a random puzzle with numbers that corresponds
+	 * to that ID
 	 * 
 	 * @param comboID
 	 * @return
 	 */
 
-	private static int[][] randomState(int comboID) {
+	private static Puzzle randomState(int comboID) {
 
-		int[][] puzzle = new int[n][n];
+		String[][] puzzle = new String[n][n];
 		String topOption = "";
 		String middleOption = "";
 		String bottomOption = "";
-		int[] arrTop = new int[n];
-		int[] arrMid = new int[n];
-		int[] arrBot = new int[n];
+		String[] arrTop = new String[n];
+		String[] arrMid = new String[n];
+		String[] arrBot = new String[n];
 		Set<String> top = new HashSet<>();
 		Set<String> mid = new HashSet<>();
 		Set<String> bot = new HashSet<>();
@@ -70,9 +71,10 @@ public class RandomStateGenerator {
 		switch (comboID) {
 		case 1:
 
-			topOption = "012";
-			middleOption = "345";
+			topOption = "12 ";
+			middleOption = "453";
 			bottomOption = "768";
+			
 
 			// generate top row
 			combinations("", topOption, top);
@@ -107,8 +109,8 @@ public class RandomStateGenerator {
 
 		case 2:
 
-			topOption = "345";
-			middleOption = "012";
+			topOption = "12 ";
+			middleOption = "345";
 			bottomOption = "678";
 
 			// generate top row
@@ -143,9 +145,15 @@ public class RandomStateGenerator {
 			break;
 
 		}
-		return puzzle;
+		
+		
+
+	
+		Puzzle puzzleObject = new Puzzle (puzzle);
+		return puzzleObject;
 
 	}
+
 
 	/**
 	 * give a set of combinationID pick one randomly
@@ -154,7 +162,7 @@ public class RandomStateGenerator {
 	 * @return
 	 */
 
-	private static int[] pickOneCombination(Set<String> combinations) {
+	private static String[] pickOneCombination(Set<String> combinations) {
 
 		Random rand = new Random();
 		Object[] cmb = combinations.toArray();
@@ -164,19 +172,19 @@ public class RandomStateGenerator {
 //		System.out.println(str);
 		char[] choice = str.toCharArray();
 
-		int[] arr = new int[n];
+		String[] arr = new String[n];
 
 		for (int i = 0; i < n; i++) {
 			String s = Character.toString(choice[i]);
 
-			arr[i] = Integer.parseInt(s);
+			arr[i] = s;
 		}
 
 		return arr;
 	}
 
 	/**
-	 * recursively generate combinationID of a string
+	 * recursively generate combinations of a string
 	 * 
 	 * @param start
 	 * @param inputs
@@ -195,22 +203,28 @@ public class RandomStateGenerator {
 	}
 
 	/**
-	 * give a puzzle display it nicely on screen
+	 * given a puzzle display it nicely on screen
 	 * 
-	 * @param puzzle
+	 * @param least
 	 */
-	public static void displayPuzzle(int[][] puzzle) {
+	public static String displayPuzzle(Puzzle least) {
+
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < n; i++) {
 
 			for (int j = 0; j < n; j++) {
 
-				System.out.print(puzzle[i][j] + " ");
+				sb.append(least.getMatrix()[i][j] + " ");
+
 			}
-			System.out.println();
+			sb.append("\n");
 		}
 
-		System.out.println();
+		sb.append("\n");
+
+//		System.out.print(sb.toString());
+		return sb.toString();
 	}
 
 	/**
@@ -218,18 +232,21 @@ public class RandomStateGenerator {
 	 * 
 	 * @param states
 	 */
-	public static void displayStates(HashMap<int[][], int[][]> states) {
+	public static void displayStates(HashMap<Puzzle, Puzzle> states) {
 
-		System.out.println("Start");
+		StringBuilder sb = new StringBuilder();
 
-		for (Entry<int[][], int[][]> entry : states.entrySet()) {
+		sb.append("Start\n");
 
-			displayPuzzle(entry.getKey());
+		for (Entry<Puzzle, Puzzle> entry : states.entrySet()) {
 
-			System.out.println("End");
-			displayPuzzle(entry.getValue());
+			sb.append(displayPuzzle(entry.getKey()));
+			sb.append("End\n");
+			sb.append(displayPuzzle(entry.getValue()));
 
 		}
+
+		System.out.println(sb.toString());
 
 	}
 
@@ -237,16 +254,16 @@ public class RandomStateGenerator {
 	 * given a 8 piece puzzle verify if valid (contains numbers 0-8, with zero
 	 * representing empty space)
 	 * 
-	 * @param puzzle
+	 * @param start
 	 * @return
 	 */
 
-	public static boolean verify(int[][] puzzle) {
+	public static boolean verify(Puzzle start) {
 		boolean valid = true;
-		ArrayList<Integer> list = toList(puzzle);
+		ArrayList<String> list = toList(start);
 
 		for (int i = min; i <= max; i++) {
-			valid = list.contains(i);
+			valid = list.contains(Integer.toString(i));
 			if (!valid) {
 				break;
 			}
@@ -259,17 +276,17 @@ public class RandomStateGenerator {
 	/**
 	 * convert a 2D array to a 1D array list
 	 * 
-	 * @param arr
+	 * @param start
 	 * @return
 	 */
-	private static ArrayList<Integer> toList(int[][] arr) {
+	private static ArrayList<String> toList(Puzzle start) {
 
-		ArrayList<Integer> list = new ArrayList<Integer>();
+		ArrayList<String> list = new ArrayList<String>();
 
 		for (int i = 0; i < n; i++) {
 
 			for (int j = 0; j < n; j++) {
-				list.add(arr[i][j]);
+				list.add(start.getMatrix()[i][j]);
 
 			}
 		}

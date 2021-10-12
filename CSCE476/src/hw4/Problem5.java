@@ -18,19 +18,22 @@ public class Problem5 {
 	public static void main(String[] args) {
 		int combinations = 100;
 
-		HashMap<int[][], int[][]> states = RandomStateGenerator.getStates();
+		HashMap<Puzzle, Puzzle> states = RandomStateGenerator.getStates();
 		RandomStateGenerator.displayStates(states);
 
-		for (Entry<int[][], int[][]> entry : states.entrySet()) {
-			int[][] start = entry.getKey();
-			int[][] end = entry.getValue();
+		for (Entry<Puzzle, Puzzle> entry : states.entrySet()) {
+			Puzzle start = entry.getKey();
+			Puzzle end = entry.getValue();
 
-			System.out.println("Start Valid: " + RandomStateGenerator.verify(start));
-			System.out.println("End Valid: " + RandomStateGenerator.verify(end));
+			boolean startValid = RandomStateGenerator.verify(start);
+			boolean endValid= RandomStateGenerator.verify(end);
+			
+			if (startValid && endValid) {
+				ArrayList<String> runInfo = EightPiecePuzzle.eightPieceDisplacedTile(start, end);
+			}
+			
 
 		}
-
-//		ArrayList<String> runInfo = EightPiecePuzzle.eightPlaceDisplacedTile(null, null);
 
 	}
 
