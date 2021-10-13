@@ -1,11 +1,8 @@
 package hw4;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.Set;
 
 public class EightPiecePuzzle {
 
@@ -15,54 +12,63 @@ public class EightPiecePuzzle {
 	private final static String right = "right";
 	private final static String left = "left";
 	private final static int n = 3;
+	private ArrayList<Puzzle> frontier;
+	private ArrayList<Puzzle> expanded;
+	private Puzzle start;
+	private Puzzle end;
 
-	public static ArrayList<String> eightPieceDisplacedTile(Puzzle start, Puzzle end) {
+	public EightPiecePuzzle(Puzzle start, Puzzle end) {
 
-		int runs = 1;
+		this.frontier = new ArrayList<Puzzle>();
+		this.expanded = new ArrayList<Puzzle>();
+		this.start = start;
+		this.end = end;
+
+	}
+
+	public ArrayList<String> eightPieceDisplacedTile() {
+
+		int gn = 1;
 		ArrayList<String> runInfo = new ArrayList<String>();
 
-		ArrayList<Puzzle> frontier = new ArrayList<Puzzle>();
-
 		Puzzle curr = start;
-
-		// get options
-		ArrayList<Puzzle> options = getOptionsDisplaced(curr, end, runs);
-		System.out.println("___________________________________");
-		System.out.println("run: " + runs);
-		System.out.println("# of options: " + options.size());
-		System.out.println("___________________________________");
-
-		displayFrontier(options);
-
-		// add to frontier
-		frontier.addAll(options);
+		expanded.add(curr);
 
 		boolean goalReached = false;
+		ArrayList<Puzzle> options = getOptionsDisplaced(curr, gn);
+		while (!goalReached) {
 
-		while (!goalReached && runs < 2) {
+			if (!goalReached) {
+				System.out.println("___________________________________");
+				System.out.println("run: " + gn);
+				System.out.println("# of options: " + options.size());
+				System.out.println("Current Node");
+				System.out.print(RandomStateGenerator.displayPuzzle(curr));
+				System.out.println("___________________________________");
+				frontier = addToFrontier(options);
+				displayFrontier();
+				Puzzle least = leastCostPuzzle();
 
-			Puzzle least = leastCostPuzzle(frontier);
-			System.out.println("*************");
-			System.out.println("Expand");
-			System.out.println("*************");
-			System.out.println(RandomStateGenerator.displayPuzzle(least));
-			System.out.println("f(n)= " + least.getCost() + "\n");
+				goalReached = goalReahed(curr, end);
 
-			curr = least;
-			goalReached = goalReahed(curr, end);
-
-			runs++;
-			frontier = expandDisplacedTile(frontier, least, end, runs);
-			System.out.println("___________________________________");
-			System.out.println("run: " + runs);
-			System.out.println("# of options: " + frontier.size());
-			System.out.println("___________________________________");
-			displayFrontier(frontier);
-			if (goalReached) {
-				System.out.println("GOAL STATE REACHED! cost: " + least.getCost());
+				System.out.println("*************");
+				System.out.println("Expand");
+				System.out.println("*************");
 				System.out.println(RandomStateGenerator.displayPuzzle(least));
+				System.out.println("f(n)= " + least.getCost() + "\n");
+
+				curr = least;
 			}
 
+			if (goalReached) {
+
+				System.out.println("GOAL STATE REACHED! NV: " + gn);
+				System.out.println(RandomStateGenerator.displayPuzzle(curr));
+
+			}
+
+			gn++;
+			options = getOptionsDisplaced(curr, gn);
 		}
 
 		return runInfo;
@@ -70,23 +76,21 @@ public class EightPiecePuzzle {
 	}
 
 	/**
-	 * expand the given least cost puzzle and add to frontier
+	 * add given options of expansions to the frontier
 	 * 
-	 * @param frontier
-	 * @param least
+	 * @param options
 	 * @return
 	 */
-
-	private static ArrayList<Puzzle> expandDisplacedTile(ArrayList<Puzzle> frontier, Puzzle least, Puzzle end, int gn) {
-		ArrayList<Puzzle> fringe = getOptionsDisplaced(least, end, gn);
-
-		ArrayList<Puzzle> expanded = new ArrayList<Puzzle>(frontier);
-		for (Puzzle puzzle : fringe) {
-			Puzzle exp = new Puzzle(puzzle, puzzle.getCost());
-			expanded.add(exp);
+	private ArrayList<Puzzle> addToFrontier(ArrayList<Puzzle> options) {
+		ArrayList<Puzzle> newFrontier = new ArrayList<Puzzle>(frontier);
+		for (Puzzle puzzle : options) {
+			int index = expanded.indexOf(puzzle);
+			if ((index == -1) && (!(puzzle.isVisited()))) {
+				newFrontier.add(puzzle);
+			}
 		}
-
-		return fringe;
+		;
+		return newFrontier;
 	}
 
 	/**
@@ -118,10 +122,11 @@ public class EightPiecePuzzle {
 	 * given a frontier find the least cost puzzle
 	 * 
 	 * @param frontier
+	 * @param visited
 	 * @return
 	 */
 
-	private static Puzzle leastCostPuzzle(ArrayList<Puzzle> frontier) {
+	private Puzzle leastCostPuzzle() {
 		Puzzle leastPuzzle = frontier.get(0);
 
 		int leastCost = leastPuzzle.getCost();
@@ -129,12 +134,15 @@ public class EightPiecePuzzle {
 		for (Puzzle puzzle : frontier) {
 			int cost = puzzle.getCost();
 
-			if (cost < leastCost) {
+			if ((cost < leastCost)) {
 				leastPuzzle = puzzle;
+
 			}
 
 		}
 
+		leastPuzzle.setVisited(true);
+		expanded.add(leastPuzzle);
 		return leastPuzzle;
 	}
 
@@ -146,7 +154,7 @@ public class EightPiecePuzzle {
 	 * @return
 	 */
 
-	private static ArrayList<Puzzle> getOptionsDisplaced(Puzzle curr, Puzzle end, int gn) {
+	private ArrayList<Puzzle> getOptionsDisplaced(Puzzle curr, int gn) {
 
 		ArrayList<Puzzle> fringe = new ArrayList<Puzzle>();
 		Puzzle u = getOption(curr, up);
@@ -196,22 +204,31 @@ public class EightPiecePuzzle {
 	 * @param goal
 	 * @return
 	 */
-	private static int displacedTiles(Puzzle puzzle, Puzzle goal) {
+	public static int displacedTiles(Puzzle puzzle, Puzzle goal) {
 		int count = 0;
 
 		for (int row = 0; row < n; row++) {
 
 			for (int col = 0; col < n; col++) {
 
-				if (!(puzzle.getMatrix()[row][col].equals(goal.getMatrix()[row][col]))) {
+				String val1 = puzzle.getMatrix()[row][col];
+				String val2 = goal.getMatrix()[row][col];
+
+				if ((!(val1.equals(val2))) && (!(val1.equals(empty)))) {
+//						System.out.println(val1+ " "+ val2);
+
 					count++;
 				}
+
+//				}
 
 			}
 		}
 
+//		System.out.println("----------------");
+
 //		System.out.println("Displaced tiles: " + count);
-		return count - 1; // don't count the empty tile
+		return count;
 	}
 
 	/**
@@ -220,7 +237,7 @@ public class EightPiecePuzzle {
 	 * @param curr
 	 * @return
 	 */
-	private static Puzzle getOption(Puzzle curr, String direction) {
+	private Puzzle getOption(Puzzle curr, String direction) {
 		Puzzle newPuzzle = null;
 
 		// find where empty tile is
@@ -242,7 +259,7 @@ public class EightPiecePuzzle {
 	 * @param index
 	 * @return
 	 */
-	public static Puzzle move(Puzzle puzzle, HashMap<Integer, Integer> index, String direction) {
+	public Puzzle move(Puzzle puzzle, HashMap<Integer, Integer> index, String direction) {
 		String value = "";
 
 		String[][] curr = puzzle.getMatrix();
@@ -295,7 +312,7 @@ public class EightPiecePuzzle {
 	 * @param direction
 	 * @return
 	 */
-	private static boolean movePossible(HashMap<Integer, Integer> index, String direction) {
+	private boolean movePossible(HashMap<Integer, Integer> index, String direction) {
 		boolean valid = false;
 
 		for (Entry<Integer, Integer> entry : index.entrySet()) {
@@ -351,7 +368,7 @@ public class EightPiecePuzzle {
 	 * @param puzzle
 	 * @return
 	 */
-	private static String[][] copyValues(String[][] puzzle) {
+	private String[][] copyValues(String[][] puzzle) {
 		String[][] newPuzzle = new String[n][n];
 
 		for (int row = 0; row < n; row++) {
@@ -372,7 +389,7 @@ public class EightPiecePuzzle {
 	 * @param curr
 	 * @return
 	 */
-	private static HashMap<Integer, Integer> findEmptyTileIndex(Puzzle curr) {
+	private HashMap<Integer, Integer> findEmptyTileIndex(Puzzle curr) {
 		HashMap<Integer, Integer> index = new HashMap<Integer, Integer>();
 
 		for (int row = 0; row < n; row++) {
@@ -395,11 +412,12 @@ public class EightPiecePuzzle {
 	 * 
 	 * @param options
 	 */
-	private static void displayFrontier(ArrayList<Puzzle> options) {
+	private void displayFrontier() {
 
-		for (Puzzle puzzle : options) {
+		for (Puzzle puzzle : frontier) {
 			System.out.print(RandomStateGenerator.displayPuzzle(puzzle));
 			System.out.println("f(n)= " + puzzle.getCost() + "\n");
+//			System.out.println("visited= " + puzzle.isVisited()+ "\n");
 		}
 
 	}

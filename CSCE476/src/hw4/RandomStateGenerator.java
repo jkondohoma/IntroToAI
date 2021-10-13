@@ -2,7 +2,6 @@ package hw4;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -20,33 +19,8 @@ public class RandomStateGenerator {
 	private final static int n = 3;
 	private final static int min = 1;
 	private final static int max = 8;
-	private final static int[] combinationID = { 1, 2 };
-
-	/**
-	 * Randomly generates a start and end state of a eight piece puzzle
-	 * 
-	 * @return
-	 */
-	public static HashMap<Puzzle, Puzzle> getStates() {
-		HashMap<Puzzle, Puzzle> states = new HashMap<Puzzle, Puzzle>();
-		int startCombo = combinationID[new Random().nextInt(combinationID.length)];
-
-		Puzzle start = randomState(startCombo);
-
-		int endCombo = startCombo + 1;
-
-		if (endCombo > combinationID.length) {
-			endCombo = 1;
-		}
-
-		Puzzle end = randomState(endCombo);
-
-		states.put(start, end);
-
-		return states;
-
-	}
-
+	private final static int[] combinationID = { 1, 2 ,3};
+	
 	/**
 	 * given a combination ID generate a random puzzle with numbers that corresponds
 	 * to that ID
@@ -64,96 +38,107 @@ public class RandomStateGenerator {
 		String[] arrTop = new String[n];
 		String[] arrMid = new String[n];
 		String[] arrBot = new String[n];
-		Set<String> top = new HashSet<>();
-		Set<String> mid = new HashSet<>();
-		Set<String> bot = new HashSet<>();
 
 		switch (comboID) {
 		case 1:
 
 			topOption = "12 ";
-			middleOption = "453";
-			bottomOption = "768";
-			
-
-			// generate top row
-			combinations("", topOption, top);
-			arrTop = pickOneCombination(top);
-
-			for (int col = 0; col < n; col++) {
-				int row = 0;
-				puzzle[row][col] = arrTop[col];
-
-			}
-
-			// generate middle row
-			combinations("", middleOption, mid);
-			arrMid = pickOneCombination(mid);
-
-			for (int col = 0; col < n; col++) {
-				int row = 1;
-				puzzle[row][col] = arrMid[col];
-
-			}
-
-			// generate bottom row
-			combinations("", bottomOption, bot);
-			arrBot = pickOneCombination(bot);
-
-			for (int col = 0; col < n; col++) {
-				int row = 2;
-				puzzle[row][col] = arrBot[col];
-
-			}
+			middleOption = "345";
+			bottomOption = "678";
 			break;
 
 		case 2:
 
-			topOption = "12 ";
-			middleOption = "345";
+			topOption = "123";
+			middleOption = " 45";
 			bottomOption = "678";
+			break;
+			
+		case 3:
 
-			// generate top row
-			combinations("", topOption, top);
-			arrTop = pickOneCombination(top);
-
-			for (int col = 0; col < n; col++) {
-				int row = 0;
-				puzzle[row][col] = arrTop[col];
-
-			}
-
-			// generate middle row
-			combinations("", middleOption, mid);
-			arrMid = pickOneCombination(mid);
-
-			for (int col = 0; col < n; col++) {
-				int row = 1;
-				puzzle[row][col] = arrMid[col];
-
-			}
-
-			// generate bottom row
-			combinations("", bottomOption, bot);
-			arrBot = pickOneCombination(bot);
-
-			for (int col = 0; col < n; col++) {
-				int row = 2;
-				puzzle[row][col] = arrBot[col];
-
-			}
+			topOption = "123";
+			middleOption = "4 5";
+			bottomOption = "678";
 			break;
 
 		}
-		
-		
 
-	
-		Puzzle puzzleObject = new Puzzle (puzzle);
+		arrTop = toArray(topOption);
+		arrMid = toArray(middleOption);
+		arrBot = toArray(bottomOption);
+
+		// generate top row
+		for (int col = 0; col < n; col++) {
+			int row = 0;
+			puzzle[row][col] = arrTop[col];
+
+		}
+
+		// generate middle row
+		for (int col = 0; col < n; col++) {
+			int row = 1;
+			puzzle[row][col] = arrMid[col];
+
+		}
+
+		// generate bottom row
+		for (int col = 0; col < n; col++) {
+			int row = 2;
+			puzzle[row][col] = arrBot[col];
+
+		}
+
+		Puzzle puzzleObject = new Puzzle(puzzle);
 		return puzzleObject;
 
 	}
 
+
+	/**
+	 * Randomly generates a start and end state of a eight piece puzzle
+	 * 
+	 * @return
+	 */
+	public static HashMap<Puzzle, Puzzle> getStates() {
+		HashMap<Puzzle, Puzzle> states = new HashMap<Puzzle, Puzzle>();
+		int startCombo = combinationID[new Random().nextInt(combinationID.length)];
+
+		Puzzle start = randomState(startCombo);
+
+		int endCombo = startCombo + 2;
+
+		if (endCombo > combinationID.length) {
+			endCombo = 1;
+		}
+
+		Puzzle end = randomState(endCombo);
+
+		states.put(start, end);
+
+		return states;
+
+	}
+	/**
+	 * convert row combination to a 1D array
+	 * 
+	 * @param row
+	 * @return
+	 */
+	private static String[] toArray(String row) {
+		String[] str = new String[n];
+		char[] charArr = row.toCharArray();
+
+		int i = 0;
+		for (char c : charArr) {
+
+			str[i] = Character.toString(c);
+
+			i++;
+
+		}
+
+		return str;
+	}
 
 	/**
 	 * give a set of combinationID pick one randomly
@@ -221,7 +206,7 @@ public class RandomStateGenerator {
 			sb.append("\n");
 		}
 
-		sb.append("\n");
+//		sb.append("\n");
 
 //		System.out.print(sb.toString());
 		return sb.toString();
@@ -241,7 +226,7 @@ public class RandomStateGenerator {
 		for (Entry<Puzzle, Puzzle> entry : states.entrySet()) {
 
 			sb.append(displayPuzzle(entry.getKey()));
-			sb.append("End\n");
+			sb.append("\nEnd\n");
 			sb.append(displayPuzzle(entry.getValue()));
 
 		}
@@ -258,9 +243,9 @@ public class RandomStateGenerator {
 	 * @return
 	 */
 
-	public static boolean verify(Puzzle start) {
+	private static boolean verify(Puzzle puzzle) {
 		boolean valid = true;
-		ArrayList<String> list = toList(start);
+		ArrayList<String> list = toList(puzzle);
 
 		for (int i = min; i <= max; i++) {
 			valid = list.contains(Integer.toString(i));
@@ -271,6 +256,48 @@ public class RandomStateGenerator {
 
 		return valid;
 
+	}
+
+	/**
+	 * determine if given puzzle is solvable
+	 * 
+	 * @param puzzle
+	 * @return
+	 */
+
+	public static boolean solvable(Puzzle puzzle) {
+		boolean valid = verify(puzzle);
+		boolean solvable = false;
+		int count = inversionCount(puzzle);
+
+		if ((count % 2 == 0) && valid) {
+			solvable = true;
+		}
+		return solvable;
+
+	}
+
+	/**
+	 * 
+	 * @param puzzle
+	 * @return
+	 */
+	private static int inversionCount(Puzzle puzzle) {
+		int count = 0;
+		int[][] arr = puzzle.integerRepresentation();
+
+		for (int row = 0; row < n - 1; row++) {
+
+			for (int col = row + 1; col < n; col++) {
+
+				if ((arr[col][row] > 0) && (arr[col][row] > arr[row][col])) {
+					count++;
+
+				}
+
+			}
+		}
+		return count;
 	}
 
 	/**
