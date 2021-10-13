@@ -22,9 +22,10 @@ import java.util.Queue;
 
 public class RomanianHolidayTree {
 
-	private final static ArrayList<City> allCities = FileParser.getCities();
-	private final static HashMap<String, HashMap<String, Integer>> allCitiesHash = FileParser.getCitiesHash(allCities);
-	private final static String goal = "Bucharest";
+	private final ArrayList<City> allCities = FileParser.getCities();
+	private final HashMap<String, HashMap<String, Integer>> allCitiesHash = FileParser.getCitiesHash(allCities);
+	private final String goal = "Bucharest";
+	private final RomanianHolidayUtilities utils = new RomanianHolidayUtilities();
 
 	/**
 	 * uninformed search strategy
@@ -33,7 +34,7 @@ public class RomanianHolidayTree {
 	 * @return
 	 */
 
-	public static ArrayList<String> uniformCostSearch(String root) {
+	public ArrayList<String> uniformCostSearch(String root) {
 
 		ArrayList<String> finalPath = new ArrayList<String>();
 		ArrayList<String> runInformation = new ArrayList<String>();
@@ -74,7 +75,7 @@ public class RomanianHolidayTree {
 				// expand that fringe
 				currNode = least.get(least.size() - 1);
 				frontier = new HashMap<ArrayList<String>, Integer>(
-						RomanianHolidayUtilities.expand(currNode, least, frontier));
+						utils.expand(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
 				nodes++;
@@ -115,7 +116,7 @@ public class RomanianHolidayTree {
 	 * @param root
 	 * @return
 	 */
-	public static ArrayList<String> greedyBestFirstSearch(String root) {
+	public ArrayList<String> greedyBestFirstSearch(String root) {
 
 		ArrayList<String> finalPath = new ArrayList<String>();
 		ArrayList<String> runInformation = new ArrayList<String>();
@@ -199,7 +200,7 @@ public class RomanianHolidayTree {
 	 * @param root
 	 * @return
 	 */
-	public static ArrayList<String> aStarBestFirstSearch(String root) {
+	public ArrayList<String> aStarBestFirstSearch(String root) {
 
 		ArrayList<String> finalPath = new ArrayList<String>();
 		ArrayList<String> runInformation = new ArrayList<String>();

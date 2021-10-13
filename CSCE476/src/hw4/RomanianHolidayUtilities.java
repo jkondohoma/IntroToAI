@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class RomanianHolidayUtilities {
-	private static  ArrayList<City> allCities = FileParser.getCities();
+	private static ArrayList<City> allCities = FileParser.getCities();
 	private static HashMap<String, HashMap<String, Integer>> allCitiesHash = FileParser.getCitiesHash(allCities);
-	
+
 	public RomanianHolidayUtilities() {
-		
+
 		RomanianHolidayUtilities.allCities = FileParser.getCities();
 		RomanianHolidayUtilities.allCitiesHash = FileParser.getCitiesHash(allCities);
 
@@ -25,7 +25,7 @@ public class RomanianHolidayUtilities {
 	 * @param frontier
 	 * @return
 	 */
-	public static HashMap<ArrayList<String>, Integer> expand(String toExpand, ArrayList<String> least,
+	public HashMap<ArrayList<String>, Integer> expand(String toExpand, ArrayList<String> least,
 			HashMap<ArrayList<String>, Integer> frontier) {
 
 		HashMap<ArrayList<String>, Integer> newFrontier = new HashMap<ArrayList<String>, Integer>();
@@ -39,8 +39,8 @@ public class RomanianHolidayUtilities {
 
 		return newFrontier;
 	}
-	
-	public  HashMap<ArrayList<City>, Integer> expand(City toExpand, ArrayList<City> least,
+
+	public HashMap<ArrayList<City>, Integer> expand(City toExpand, ArrayList<City> least,
 			HashMap<ArrayList<City>, Integer> frontier) {
 
 		HashMap<ArrayList<City>, Integer> newFrontier = new HashMap<ArrayList<City>, Integer>();
@@ -49,7 +49,6 @@ public class RomanianHolidayUtilities {
 		HashMap<City, Integer> neighbors = getNeighboors(toExpand);
 		ArrayList<ArrayList<City>> fringe = generateFringeG(neighbors, least);
 
-		
 		newFrontier = addToFrontierG(fringe, frontier);
 
 		newFrontier.remove(least);
@@ -77,8 +76,8 @@ public class RomanianHolidayUtilities {
 		return newFrontier;
 
 	}
-	
-	public  HashMap<ArrayList<City>, Integer> addToFrontierG(ArrayList<ArrayList<City>> fringe,
+
+	public HashMap<ArrayList<City>, Integer> addToFrontierG(ArrayList<ArrayList<City>> fringe,
 			HashMap<ArrayList<City>, Integer> frontier) {
 
 		HashMap<ArrayList<City>, Integer> newFrontier = new HashMap<ArrayList<City>, Integer>(frontier);
@@ -91,8 +90,6 @@ public class RomanianHolidayUtilities {
 		return newFrontier;
 
 	}
-	
-	
 
 	/**
 	 * given a list of neighbors and a possible path choice generate a new fringe
@@ -122,17 +119,16 @@ public class RomanianHolidayUtilities {
 			ArrayList<City> pathChoice) {
 
 		ArrayList<ArrayList<City>> fringe = new ArrayList<ArrayList<City>>();
-		
+
 		for (Entry<City, Integer> entry : neighbors.entrySet()) {
 			ArrayList<City> pathChoiceOption = new ArrayList<City>(pathChoice);
-			
+
 			City option = entry.getKey();
 			if (!option.getVisisted()) {
 				pathChoiceOption.add(entry.getKey());
 				fringe.add(pathChoiceOption);
 			}
-			
-			
+
 //		System.out.println(pathChoiceOption);
 
 		}
@@ -155,7 +151,6 @@ public class RomanianHolidayUtilities {
 		ArrayList<Integer> listOfValues = new ArrayList<>(values);
 		Object[] keys = frontier.keySet().toArray();
 
-		
 		least = (ArrayList<City>) keys[0];
 		int leastCost = listOfValues.get(0);
 
@@ -177,7 +172,7 @@ public class RomanianHolidayUtilities {
 
 		return least;
 	}
-	
+
 	public static ArrayList<String> leastCostFrontier(HashMap<ArrayList<String>, Integer> frontier) {
 		ArrayList<String> least = new ArrayList<String>();
 
@@ -229,8 +224,7 @@ public class RomanianHolidayUtilities {
 		return newFrontier;
 
 	}
-	
-	
+
 	public HashMap<ArrayList<City>, Integer> addToFrontierGreedyBestFirstG(ArrayList<ArrayList<City>> fringe,
 			HashMap<ArrayList<City>, Integer> frontier) {
 
@@ -268,7 +262,7 @@ public class RomanianHolidayUtilities {
 		return newFrontier;
 
 	}
-	
+
 	public HashMap<ArrayList<City>, Integer> addToFrontierStarSearchG(ArrayList<ArrayList<City>> fringe,
 			HashMap<ArrayList<City>, Integer> frontier) {
 
@@ -308,8 +302,8 @@ public class RomanianHolidayUtilities {
 
 		return newFrontier;
 	}
-	
-	public  HashMap<ArrayList<City>, Integer> expandGreedyBestFirst(City toExpand, ArrayList<City> least,
+
+	public HashMap<ArrayList<City>, Integer> expandGreedyBestFirst(City toExpand, ArrayList<City> least,
 			HashMap<ArrayList<City>, Integer> frontier) {
 		HashMap<ArrayList<City>, Integer> newFrontier = new HashMap<ArrayList<City>, Integer>();
 
@@ -345,8 +339,8 @@ public class RomanianHolidayUtilities {
 
 		return newFrontier;
 	}
-	
-	public  HashMap<ArrayList<City>, Integer> expandStarSearch(City toExpand, ArrayList<City> least,
+
+	public HashMap<ArrayList<City>, Integer> expandStarSearch(City toExpand, ArrayList<City> least,
 			HashMap<ArrayList<City>, Integer> frontier) {
 		HashMap<ArrayList<City>, Integer> newFrontier = new HashMap<ArrayList<City>, Integer>();
 
@@ -379,8 +373,8 @@ public class RomanianHolidayUtilities {
 
 		return gn;
 	}
-	
-	public  int pathCostG(ArrayList<City> pathChoice) {
+
+	public int pathCostG(ArrayList<City> pathChoice) {
 		int gn = 0;
 		City curr = pathChoice.get(0);
 		for (int i = 1; i < pathChoice.size(); i++) {
@@ -393,7 +387,6 @@ public class RomanianHolidayUtilities {
 
 		return gn;
 	}
-
 
 	/**
 	 * given a hashmap of cities and cost function pick one with the least cost
@@ -432,7 +425,7 @@ public class RomanianHolidayUtilities {
 	 * 
 	 * @return
 	 */
-	private static int neighborsP(String cityOne, String cityTwo) {
+	public static int neighborsP(String cityOne, String cityTwo) {
 		int dist = 0;
 		HashMap<String, Integer> neighbors = allCitiesHash.get(cityOne);
 		for (Entry<String, Integer> entry : neighbors.entrySet()) {
@@ -445,7 +438,7 @@ public class RomanianHolidayUtilities {
 
 		return dist;
 	}
-	
+
 	private int neighborsP(City cityOne, City cityTwo) {
 		int dist = 0;
 		HashMap<City, Integer> neighbors = getNeighboors(cityOne);
@@ -463,16 +456,26 @@ public class RomanianHolidayUtilities {
 	/**
 	 * Using allCitiesHtable,a function that takes the name of a city myCity and a
 	 * number distance, then returns, for all direct neighbors within distance from
-	 * myCity ( ), an association list of the structures of the neighbors of myCity
-	 * and their distance to myCity
+	 * myCity (LEQ), an association list of the structures of the neighbors of
+	 * myCity and their distance to myCity
 	 * 
 	 * @return
 	 */
 
-	private static ArrayList<String> neighborsWithinD() {
-		ArrayList<String> neighbors = new ArrayList<String>();
+	public static HashMap<String, Integer> neighborsWithinD(String myCity, int distance) {
+		HashMap<String, Integer> neighbors = new HashMap<String, Integer>();
+		City city = getCityFromList(myCity);
 
-		return null;
+		for (Entry<String, Integer> entry : city.getNeighboors().entrySet()) {
+			String cite = entry.getKey();
+			int dist = entry.getValue();
+			if (distance <= dist) {
+				neighbors.put(cite, dist);
+			}
+
+		}
+
+		return neighbors;
 	}
 
 	/**
@@ -483,7 +486,7 @@ public class RomanianHolidayUtilities {
 	 * @return
 	 */
 
-	private static ArrayList<String> neighborsUsingHtable(String city) {
+	public static ArrayList<String> neighborsUsingHtable(String city) {
 		ArrayList<String> neighbors = new ArrayList<String>();
 
 		Entry<String, HashMap<String, Integer>> struct = getCityFromHtable(city);
@@ -503,7 +506,7 @@ public class RomanianHolidayUtilities {
 	 * 
 	 * @param city
 	 */
-	private static ArrayList<String> neighborsUsingList(String city) {
+	public static ArrayList<String> neighborsUsingList(String city) {
 		ArrayList<String> neighbors = new ArrayList<String>();
 
 		for (Entry<String, Integer> entry : getCityFromList(city).getNeighboors().entrySet()) {
@@ -561,11 +564,9 @@ public class RomanianHolidayUtilities {
 	}
 
 	public HashMap<City, Integer> getNeighboors(City city) {
-		
 
 		HashMap<City, Integer> allCitiesHash = new HashMap<City, Integer>();
 
-	
 		HashMap<String, Integer> neighbors = FileParser.getCitiesHash(allCities).get(city.getName());
 
 		for (Entry<String, Integer> entry : neighbors.entrySet()) {
@@ -596,11 +597,11 @@ public class RomanianHolidayUtilities {
 			for (Entry<String, Integer> cities : value.entrySet()) {
 
 				String item = cities.getKey();
-				 City cite = getCityFromList(item);
-				 structures.add(cite);
-				
-		}
-			
+				City cite = getCityFromList(item);
+				structures.add(cite);
+
+			}
+
 		}
 		return structures;
 	}

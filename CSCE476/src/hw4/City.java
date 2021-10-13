@@ -48,11 +48,6 @@ public class City implements Comparable<City> {
 		return "City [name=" + name + ", neighboors=" + neighboors + ", visited=" + visited + ", h=" + h + "]";
 	}
 
-//	@Override
-//	public String toString() {
-//		return name+": "+ visited;
-//	}
-
 	@Override
 	public String toString() {
 		return name;

@@ -27,7 +27,8 @@ public class DisplaySearch {
 					"________________________________________________________________________________________________________________________________________________________");
 
 			for (int i = 0; i < cities.size(); i++) {
-				ArrayList<String> runInfo1 = RomanianHolidayTree.uniformCostSearch(cities.get(i));
+				RomanianHolidayTree treeRun = new RomanianHolidayTree();
+				ArrayList<String> runInfo1 = treeRun.uniformCostSearch(cities.get(i));
 
 				displayRunInformation(runInfo1);
 
@@ -67,7 +68,8 @@ public class DisplaySearch {
 					"____________________________________________________________________________________________________________________________________________");
 
 			for (int i = 0; i < cities.size(); i++) {
-				ArrayList<String> runInfo = RomanianHolidayTree.aStarBestFirstSearch(cities.get(i));
+				RomanianHolidayTree treeRun = new RomanianHolidayTree();
+				ArrayList<String> runInfo = treeRun.aStarBestFirstSearch(cities.get(i));
 				displayRunInformation(runInfo);
 
 			}
@@ -127,7 +129,8 @@ public class DisplaySearch {
 			System.out.println(
 					"________________________________________________________________________________________________________________________________________________________");
 			for (int i = 0; i < cities.size(); i++) {
-				ArrayList<String> runInfo3 = RomanianHolidayTree.greedyBestFirstSearch(cities.get(i));
+				RomanianHolidayTree treeRun = new RomanianHolidayTree();
+				ArrayList<String> runInfo3 = treeRun.greedyBestFirstSearch(cities.get(i));
 
 				displayRunInformation(runInfo3);
 

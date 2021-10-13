@@ -14,11 +14,11 @@ import java.util.Map.Entry;
  *
  */
 public class RomanianHolidayGraph {
-	private static RomanianHolidayUtilities utils = new RomanianHolidayUtilities();
-	private final static String goal = "Bucharest";
+	private RomanianHolidayUtilities utils = new RomanianHolidayUtilities();
+	private final String goal = "Bucharest";
 	
 	public RomanianHolidayGraph() {
-		RomanianHolidayGraph.utils = new RomanianHolidayUtilities();
+		this.utils = new RomanianHolidayUtilities();
 
 	}
 	
