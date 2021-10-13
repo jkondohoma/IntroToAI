@@ -21,31 +21,34 @@ public class Problem5 {
 	public static void main(String[] args) {
 		int combinations = 100;
 
-		HashMap<Puzzle, Puzzle> states = RandomStateGenerator.getStates();
-		RandomStateGenerator.displayStates(states);
-		
+		ArrayList<HashMap<Puzzle, Puzzle>> allStates = new ArrayList<HashMap<Puzzle, Puzzle>>();
 
-		for (Entry<Puzzle, Puzzle> entry : states.entrySet()) {
-			Puzzle start = entry.getKey();
-			Puzzle end = entry.getValue();
-
-			
-			boolean startValid = RandomStateGenerator.solvable(start);
-			boolean endValid = RandomStateGenerator.solvable(end);
-			
-			System.out.println(startValid);
-			System.out.println(endValid);
-
-			if (startValid && endValid) {
-				EightPiecePuzzle solve = new EightPiecePuzzle(start,end);
-				ArrayList<String> runInfo = solve.eightPieceDisplacedTile();
-				
-				
-			} else {
-				System.out.println("combination" + " not solvable");
-			}
-
+		for (int i = 0; i < combinations; i++) {
+			HashMap<Puzzle, Puzzle> states = RandomStateGenerator.getStates();
+			allStates.add(states);
 		}
+
+//		for (Entry<Puzzle, Puzzle> entry : states.entrySet()) {
+//			Puzzle start = entry.getKey();
+//			Puzzle end = entry.getValue();
+//
+//			
+//			boolean startValid = RandomStateGenerator.solvable(start);
+//			boolean endValid = RandomStateGenerator.solvable(end);
+//			
+//			System.out.println(startValid);
+//			System.out.println(endValid);
+//
+//			if (startValid && endValid) {
+//				EightPiecePuzzle solve = new EightPiecePuzzle(start,end);
+//				ArrayList<String> runInfo = solve.eightPieceDisplacedTile();
+//				
+//				
+//			} else {
+//				System.out.println("combination" + " not solvable");
+//			}
+//
+//		}
 
 //		String[][] startTest = {{"1", "2","3"},{" ", "4","6"},{"7", "5","8"}};
 //		String[][] endTest = {{"1", "2","3"},{"4", "5","6"},{"7", "8"," "}};
@@ -64,6 +67,34 @@ public class Problem5 {
 //		EightPiecePuzzle solve = new EightPiecePuzzle(start,end);
 //
 //		ArrayList<String> runInfo = solve.eightPieceDisplacedTile();
+	}
+
+	public static void solveAllSates(ArrayList<HashMap<Puzzle, Puzzle>> allStates) {
+
+		for (HashMap<Puzzle, Puzzle> states : allStates) {
+
+			for (Entry<Puzzle, Puzzle> entry : states.entrySet()) {
+				Puzzle start = entry.getKey();
+				Puzzle end = entry.getValue();
+				
+				boolean startValid = RandomStateGenerator.solvable(start);
+				boolean endValid = RandomStateGenerator.solvable(end);
+				
+				if (startValid && endValid) {
+				EightPiecePuzzle solve = new EightPiecePuzzle(start,end);
+				ArrayList<String> runInfo = solve.eightPieceDisplacedTile();
+				System.out.printf("%s %s %s %s %s", "Instance", "#NV","Path Cost", "CPU Time");
+				
+				
+			} else {
+				System.out.println("combination" + " not solvable");
+			}
+				
+				
+			}
+
+		}
+
 	}
 
 }

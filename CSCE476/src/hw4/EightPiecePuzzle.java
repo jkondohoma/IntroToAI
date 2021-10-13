@@ -42,34 +42,34 @@ public class EightPiecePuzzle {
 
 		if (!goalReached) {
 			ArrayList<Puzzle> options = getOptionsDisplaced(curr, gn);
-			while (!goalReached) {
+			while (!goalReached && gn < 1) {
 
 				if (!goalReached) {
-					System.out.println("___________________________________");
-					System.out.println("run: " + gn);
-					System.out.println("# of options: " + options.size());
-					System.out.println("Current Node");
-					System.out.print(RandomStateGenerator.displayPuzzle(curr));
-					System.out.println("___________________________________");
+//					System.out.println("___________________________________");
+//					System.out.println("run: " + gn);
+//					System.out.println("# of options: " + options.size());
+//					System.out.println("Current Node");
+//					System.out.print(RandomStateGenerator.displayPuzzle(curr));
+//					System.out.println("___________________________________");
 					frontier = addToFrontier(options);
-					displayFrontier();
+//					displayFrontier();
 					Puzzle least = leastCostPuzzle();
 
 					goalReached = goalReahed(curr, end);
 
-					System.out.println("*************");
-					System.out.println("Expand");
-					System.out.println("*************");
-					System.out.println(RandomStateGenerator.displayPuzzle(least));
-					System.out.println("f(n)= " + least.getCost() + "\n");
+//					System.out.println("*************");
+//					System.out.println("Expand");
+//					System.out.println("*************");
+//					System.out.println(RandomStateGenerator.displayPuzzle(least));
+//					System.out.println("f(n)= " + least.getCost() + "\n");
 
 					curr = least;
 				}
 
 				if (goalReached) {
 
-					System.out.println("GOAL STATE REACHED! NV: " + gn);
-					System.out.println(RandomStateGenerator.displayPuzzle(curr));
+//					System.out.println("GOAL STATE REACHED! NV: " + gn);
+//					System.out.println(RandomStateGenerator.displayPuzzle(curr));
 
 				}
 
@@ -78,7 +78,7 @@ public class EightPiecePuzzle {
 			}
 		} else {
 
-			System.out.println("GOAL STATE REACHED! NV: " + 0);
+//			System.out.println("GOAL STATE REACHED! NV: " + 0);
 		}
 		return runInfo;
 

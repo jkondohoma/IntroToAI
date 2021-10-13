@@ -569,7 +569,7 @@ public class RomaninaHolidayUtilities {
 		HashMap<String, Integer> neighbors = FileParser.getCitiesHash(allCities).get(city.getName());
 
 		for (Entry<String, Integer> entry : neighbors.entrySet()) {
-			City cte = getCityFromList(entry.getKey(), allCities);
+			City cte = getCityFromList(entry.getKey());
 			allCitiesHash.put(cte, entry.getValue());
 
 		}
@@ -577,31 +577,17 @@ public class RomaninaHolidayUtilities {
 		return allCitiesHash;
 	}
 
-	public static City getCityFromList(String input, ArrayList<City> allCities) {
-
-		City structure = null;
-		for (City city : allCities) {
-			if (city.getName().equals(input)) {
-				structure = city;
-
-			}
-		}
-
-		return structure;
-
-	}
 	/**
 	 * takes a variable, allCitiesHtable and returns a list of all the structures of
 	 * cities on the map.
 	 * 
-	 * given a city return a list of cities where the given city is part of
-	 * neighboors
+	 * take the hash of the cities and return it back into a list
 	 * 
 	 * @param allCitieshash
 	 */
-	private static ArrayList<String> allCitiesFromHtable(String city) {
+	public static ArrayList<City> allCitiesFromHtable() {
 
-		ArrayList<String> structures = new ArrayList<String>();
+		ArrayList<City> structures = new ArrayList<City>();
 
 		for (Entry<String, HashMap<String, Integer>> entry : allCitiesHash.entrySet()) {
 			String key = entry.getKey();
@@ -612,11 +598,11 @@ public class RomaninaHolidayUtilities {
 			for (Entry<String, Integer> cities : value.entrySet()) {
 
 				String item = cities.getKey();
-				if (item.equals(city))
-					structures.add(key);
-
-			}
-
+				 City cite = getCityFromList(item);
+				 structures.add(cite);
+				
+		}
+			
 		}
 		return structures;
 	}

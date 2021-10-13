@@ -44,10 +44,9 @@ public class City implements Comparable<City> {
 		this.visited = visited;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "City [name=" + name + ", neighboors=" + neighboors + ", visited=" + visited + ", h=" + h + "]";
-//	}
+	public String display() {
+		return "City [name=" + name + ", neighboors=" + neighboors + ", visited=" + visited + ", h=" + h + "]";
+	}
 
 //	@Override
 //	public String toString() {

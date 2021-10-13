@@ -1,6 +1,5 @@
 package hw4;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
@@ -16,10 +15,6 @@ import java.util.Map.Entry;
  */
 
 public class RandomStateGenerator {
-	private final static String up = "up";
-	private final static String down = "down";
-	private final static String right = "right";
-	private final static String left = "left";
 	private final static int n = 3;
 
 	/**
@@ -42,44 +37,6 @@ public class RandomStateGenerator {
 
 		return states;
 
-	}
-
-	/**
-	 * scramble puzzle randomly
-	 * 
-	 * @return
-	 */
-	private static Puzzle scramblePuzzle(Puzzle puzzle) {
-
-		EightPiecePuzzle utils = new EightPiecePuzzle();
-		HashMap<Integer, Integer> index = utils.findEmptyTileIndex(puzzle);
-		Puzzle newPuzzle = puzzle;
-
-		if (utils.movePossible(index, right)) {
-
-			newPuzzle = utils.move(puzzle, index, right);
-		} else if (utils.movePossible(index, left)) {
-
-			newPuzzle = utils.move(puzzle, index, left);
-		} else if (utils.movePossible(index, down)) {
-
-			newPuzzle = utils.move(puzzle, index, down);
-		} else if (utils.movePossible(index, up)) {
-
-			newPuzzle = utils.move(puzzle, index, up);
-		}
-
-		HashMap<Integer, Integer> newIndex = utils.findEmptyTileIndex(newPuzzle);
-		Puzzle updatedPuzzle = newPuzzle;
-
-		if (utils.movePossible(index, up)) {
-
-			updatedPuzzle = utils.move(newPuzzle, newIndex, up);
-		}
-
-		newIndex = utils.findEmptyTileIndex(updatedPuzzle);
-
-		return newPuzzle;
 	}
 
 	/**
