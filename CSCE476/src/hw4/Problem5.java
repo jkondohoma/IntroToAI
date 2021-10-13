@@ -32,6 +32,9 @@ public class Problem5 {
 			
 			boolean startValid = RandomStateGenerator.solvable(start);
 			boolean endValid = RandomStateGenerator.solvable(end);
+			
+			System.out.println(startValid);
+			System.out.println(endValid);
 
 			if (startValid && endValid) {
 				EightPiecePuzzle solve = new EightPiecePuzzle(start,end);

@@ -26,6 +26,10 @@ public class EightPiecePuzzle {
 
 	}
 
+	public EightPiecePuzzle() {
+		// so i'm able to access functions
+	}
+
 	public ArrayList<String> eightPieceDisplacedTile() {
 
 		int gn = 1;
@@ -34,43 +38,48 @@ public class EightPiecePuzzle {
 		Puzzle curr = start;
 		expanded.add(curr);
 
-		boolean goalReached = false;
-		ArrayList<Puzzle> options = getOptionsDisplaced(curr, gn);
-		while (!goalReached) {
+		boolean goalReached = goalReahed(curr, end);
 
-			if (!goalReached) {
-				System.out.println("___________________________________");
-				System.out.println("run: " + gn);
-				System.out.println("# of options: " + options.size());
-				System.out.println("Current Node");
-				System.out.print(RandomStateGenerator.displayPuzzle(curr));
-				System.out.println("___________________________________");
-				frontier = addToFrontier(options);
-				displayFrontier();
-				Puzzle least = leastCostPuzzle();
+		if (!goalReached) {
+			ArrayList<Puzzle> options = getOptionsDisplaced(curr, gn);
+			while (!goalReached) {
 
-				goalReached = goalReahed(curr, end);
+				if (!goalReached) {
+					System.out.println("___________________________________");
+					System.out.println("run: " + gn);
+					System.out.println("# of options: " + options.size());
+					System.out.println("Current Node");
+					System.out.print(RandomStateGenerator.displayPuzzle(curr));
+					System.out.println("___________________________________");
+					frontier = addToFrontier(options);
+					displayFrontier();
+					Puzzle least = leastCostPuzzle();
 
-				System.out.println("*************");
-				System.out.println("Expand");
-				System.out.println("*************");
-				System.out.println(RandomStateGenerator.displayPuzzle(least));
-				System.out.println("f(n)= " + least.getCost() + "\n");
+					goalReached = goalReahed(curr, end);
 
-				curr = least;
+					System.out.println("*************");
+					System.out.println("Expand");
+					System.out.println("*************");
+					System.out.println(RandomStateGenerator.displayPuzzle(least));
+					System.out.println("f(n)= " + least.getCost() + "\n");
+
+					curr = least;
+				}
+
+				if (goalReached) {
+
+					System.out.println("GOAL STATE REACHED! NV: " + gn);
+					System.out.println(RandomStateGenerator.displayPuzzle(curr));
+
+				}
+
+				gn++;
+				options = getOptionsDisplaced(curr, gn);
 			}
+		} else {
 
-			if (goalReached) {
-
-				System.out.println("GOAL STATE REACHED! NV: " + gn);
-				System.out.println(RandomStateGenerator.displayPuzzle(curr));
-
-			}
-
-			gn++;
-			options = getOptionsDisplaced(curr, gn);
+			System.out.println("GOAL STATE REACHED! NV: " + 0);
 		}
-
 		return runInfo;
 
 	}
@@ -312,7 +321,7 @@ public class EightPiecePuzzle {
 	 * @param direction
 	 * @return
 	 */
-	private boolean movePossible(HashMap<Integer, Integer> index, String direction) {
+	public boolean movePossible(HashMap<Integer, Integer> index, String direction) {
 		boolean valid = false;
 
 		for (Entry<Integer, Integer> entry : index.entrySet()) {
@@ -368,7 +377,7 @@ public class EightPiecePuzzle {
 	 * @param puzzle
 	 * @return
 	 */
-	private String[][] copyValues(String[][] puzzle) {
+	public String[][] copyValues(String[][] puzzle) {
 		String[][] newPuzzle = new String[n][n];
 
 		for (int row = 0; row < n; row++) {
@@ -389,7 +398,7 @@ public class EightPiecePuzzle {
 	 * @param curr
 	 * @return
 	 */
-	private HashMap<Integer, Integer> findEmptyTileIndex(Puzzle curr) {
+	public HashMap<Integer, Integer> findEmptyTileIndex(Puzzle curr) {
 		HashMap<Integer, Integer> index = new HashMap<Integer, Integer>();
 
 		for (int row = 0; row < n; row++) {
