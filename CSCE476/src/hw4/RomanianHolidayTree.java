@@ -38,7 +38,7 @@ public class RomanianHolidayTree {
 		ArrayList<String> finalPath = new ArrayList<String>();
 		ArrayList<String> runInformation = new ArrayList<String>();
 
-		String currNode = RomaninaHolidayUtilities.getCityFromList(root).getName();
+		String currNode = RomanianHolidayUtilities.getCityFromList(root).getName();
 
 		HashMap<ArrayList<String>, Integer> frontier = new HashMap<ArrayList<String>, Integer>();
 		// add first node of where we're at
@@ -49,8 +49,8 @@ public class RomanianHolidayTree {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<String>> fringe = RomaninaHolidayUtilities.generateFringe(neighbors, pathChoice);
-		frontier = RomaninaHolidayUtilities.addToFrontier(fringe, frontier);
+		ArrayList<ArrayList<String>> fringe = RomanianHolidayUtilities.generateFringe(neighbors, pathChoice);
+		frontier = RomanianHolidayUtilities.addToFrontier(fringe, frontier);
 
 		int nodes = 1;
 
@@ -68,13 +68,13 @@ public class RomanianHolidayTree {
 				}
 
 //				 find least cost fringe in frontier
-				ArrayList<String> least = RomaninaHolidayUtilities.leastCostFrontier(frontier);
+				ArrayList<String> least = RomanianHolidayUtilities.leastCostFrontier(frontier);
 //				System.out.println("\t\t\tEXPAND: " + least);
 
 				// expand that fringe
 				currNode = least.get(least.size() - 1);
 				frontier = new HashMap<ArrayList<String>, Integer>(
-						RomaninaHolidayUtilities.expand(currNode, least, frontier));
+						RomanianHolidayUtilities.expand(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
 				nodes++;
@@ -82,7 +82,7 @@ public class RomanianHolidayTree {
 
 				if (currNode.equals(goal)) {
 					finalPath = new ArrayList<String>(least);
-//					System.out.println("\t\t\tDESTINATION REACHED! cost: " + RomaninaHolidayUtilities.pathCost(least));
+//					System.out.println("\t\t\tDESTINATION REACHED! cost: " + RomanianHolidayUtilities.pathCost(least));
 				}
 			}
 			Instant endTime = Instant.now();
@@ -91,14 +91,14 @@ public class RomanianHolidayTree {
 			runInformation.add(root);
 			runInformation.add(Integer.toString(nodes));
 			runInformation.add(finalPath.toString());
-			runInformation.add(Integer.toString(RomaninaHolidayUtilities.pathCost(finalPath)));
+			runInformation.add(Integer.toString(RomanianHolidayUtilities.pathCost(finalPath)));
 			runInformation.add(Integer.toString(searchTime.getNano()));
 		} else {
 			finalPath.add(root);
 			runInformation.add(root);
 			runInformation.add("1");
 			runInformation.add(finalPath.toString());
-			runInformation.add(Integer.toString(RomaninaHolidayUtilities.pathCost(finalPath)));
+			runInformation.add(Integer.toString(RomanianHolidayUtilities.pathCost(finalPath)));
 			runInformation.add("0");
 
 //			System.out.println(runInformation);
@@ -120,7 +120,7 @@ public class RomanianHolidayTree {
 		ArrayList<String> finalPath = new ArrayList<String>();
 		ArrayList<String> runInformation = new ArrayList<String>();
 
-		String currNode = RomaninaHolidayUtilities.getCityFromList(root).getName();
+		String currNode = RomanianHolidayUtilities.getCityFromList(root).getName();
 
 		HashMap<ArrayList<String>, Integer> frontier = new HashMap<ArrayList<String>, Integer>();
 		// add first node of where we're at
@@ -131,8 +131,8 @@ public class RomanianHolidayTree {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<String>> fringe = RomaninaHolidayUtilities.generateFringe(neighbors, pathChoice);
-		frontier = RomaninaHolidayUtilities.addToFrontierGreedyBestFirst(fringe, frontier);
+		ArrayList<ArrayList<String>> fringe = RomanianHolidayUtilities.generateFringe(neighbors, pathChoice);
+		frontier = RomanianHolidayUtilities.addToFrontierGreedyBestFirst(fringe, frontier);
 
 		int nodes = 1;
 
@@ -150,13 +150,13 @@ public class RomanianHolidayTree {
 				}
 
 				// find least cost fringe in frontier
-				ArrayList<String> least = RomaninaHolidayUtilities.leastCostFrontier(frontier);
+				ArrayList<String> least = RomanianHolidayUtilities.leastCostFrontier(frontier);
 //				System.out.println("\t\t\tEXPAND: " + least);
 
 				// expand that fringe
 				currNode = least.get(least.size() - 1);
 				frontier = new HashMap<ArrayList<String>, Integer>(
-						RomaninaHolidayUtilities.expandGreedyBestFirst(currNode, least, frontier));
+						RomanianHolidayUtilities.expandGreedyBestFirst(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
 				nodes++;
@@ -164,7 +164,7 @@ public class RomanianHolidayTree {
 
 				if (currNode.equals(goal)) {
 					finalPath = new ArrayList<String>(least);
-//					System.out.println("\t\t\tDESTINATION REACHED! cost: " + RomaninaHolidayUtilities.pathCost(least));
+//					System.out.println("\t\t\tDESTINATION REACHED! cost: " + RomanianHolidayUtilities.pathCost(least));
 				}
 			}
 			Instant endTime = Instant.now();
@@ -174,7 +174,7 @@ public class RomanianHolidayTree {
 			runInformation.add(root);
 			runInformation.add(Integer.toString(nodes));
 			runInformation.add(finalPath.toString());
-			runInformation.add(Integer.toString(RomaninaHolidayUtilities.pathCost(finalPath)));
+			runInformation.add(Integer.toString(RomanianHolidayUtilities.pathCost(finalPath)));
 			runInformation.add(Integer.toString(searchTime.getNano()));
 		} else {
 
@@ -182,7 +182,7 @@ public class RomanianHolidayTree {
 			runInformation.add(root);
 			runInformation.add("1");
 			runInformation.add(finalPath.toString());
-			runInformation.add(Integer.toString(RomaninaHolidayUtilities.pathCost(finalPath)));
+			runInformation.add(Integer.toString(RomanianHolidayUtilities.pathCost(finalPath)));
 			runInformation.add("0");
 
 //			System.out.println(runInformation);
@@ -204,7 +204,7 @@ public class RomanianHolidayTree {
 		ArrayList<String> finalPath = new ArrayList<String>();
 		ArrayList<String> runInformation = new ArrayList<String>();
 
-		String currNode = RomaninaHolidayUtilities.getCityFromList(root).getName();
+		String currNode = RomanianHolidayUtilities.getCityFromList(root).getName();
 
 		HashMap<ArrayList<String>, Integer> frontier = new HashMap<ArrayList<String>, Integer>();
 		// add first node of where we're at
@@ -215,8 +215,8 @@ public class RomanianHolidayTree {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<String>> fringe = RomaninaHolidayUtilities.generateFringe(neighbors, pathChoice);
-		frontier = RomaninaHolidayUtilities.addToFrontierStarSearch(fringe, frontier);
+		ArrayList<ArrayList<String>> fringe = RomanianHolidayUtilities.generateFringe(neighbors, pathChoice);
+		frontier = RomanianHolidayUtilities.addToFrontierStarSearch(fringe, frontier);
 
 		int nodes = 1;
 
@@ -234,13 +234,13 @@ public class RomanianHolidayTree {
 				}
 
 				// find least cost fringe in frontier
-				ArrayList<String> least = RomaninaHolidayUtilities.leastCostFrontier(frontier);
+				ArrayList<String> least = RomanianHolidayUtilities.leastCostFrontier(frontier);
 //				System.out.println("\t\t\tEXPAND: " + least);
 
 				// expand that fringe
 				currNode = least.get(least.size() - 1);
 				frontier = new HashMap<ArrayList<String>, Integer>(
-						RomaninaHolidayUtilities.expandStarSearch(currNode, least, frontier));
+						RomanianHolidayUtilities.expandStarSearch(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
 				nodes++;
@@ -248,7 +248,7 @@ public class RomanianHolidayTree {
 
 				if (currNode.equals(goal)) {
 					finalPath = new ArrayList<String>(least);
-//					System.out.println("\t\t\tDESTINATION REACHED! cost: " + RomaninaHolidayUtilities.pathCost(least));
+//					System.out.println("\t\t\tDESTINATION REACHED! cost: " + RomanianHolidayUtilities.pathCost(least));
 				}
 			}
 			Instant endTime = Instant.now();
@@ -257,7 +257,7 @@ public class RomanianHolidayTree {
 			runInformation.add(root);
 			runInformation.add(Integer.toString(nodes));
 			runInformation.add(finalPath.toString());
-			runInformation.add(Integer.toString(RomaninaHolidayUtilities.pathCost(finalPath)));
+			runInformation.add(Integer.toString(RomanianHolidayUtilities.pathCost(finalPath)));
 			runInformation.add(Integer.toString(searchTime.getNano()));
 		} else {
 
@@ -265,7 +265,7 @@ public class RomanianHolidayTree {
 			runInformation.add(root);
 			runInformation.add("1");
 			runInformation.add(finalPath.toString());
-			runInformation.add(Integer.toString(RomaninaHolidayUtilities.pathCost(finalPath)));
+			runInformation.add(Integer.toString(RomanianHolidayUtilities.pathCost(finalPath)));
 			runInformation.add("0");
 
 //			System.out.println(runInformation);

@@ -14,11 +14,11 @@ import java.util.Map.Entry;
  *
  */
 public class RomanianHolidayGraph {
-	private static RomaninaHolidayUtilities utils = new RomaninaHolidayUtilities();
+	private static RomanianHolidayUtilities utils = new RomanianHolidayUtilities();
 	private final static String goal = "Bucharest";
 	
 	public RomanianHolidayGraph() {
-		RomanianHolidayGraph.utils = new RomaninaHolidayUtilities();
+		RomanianHolidayGraph.utils = new RomanianHolidayUtilities();
 
 	}
 	
@@ -33,7 +33,7 @@ public class RomanianHolidayGraph {
 		ArrayList<City> finalPath = new ArrayList<City>();
 		ArrayList<String> runInformation = new ArrayList<String>();
 
-		City currNode = RomaninaHolidayUtilities.getCityFromList(root);
+		City currNode = RomanianHolidayUtilities.getCityFromList(root);
 
 		HashMap<ArrayList<City>, Integer> frontier = new HashMap<ArrayList<City>, Integer>();
 		// add first node of where we're at
@@ -47,7 +47,7 @@ public class RomanianHolidayGraph {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<City>> fringe = RomaninaHolidayUtilities.generateFringeG(neighbors, pathChoice);
+		ArrayList<ArrayList<City>> fringe = RomanianHolidayUtilities.generateFringeG(neighbors, pathChoice);
 		frontier = utils.addToFrontierStarSearchG(fringe, frontier);
 
 		int nodes = 1;
@@ -67,7 +67,7 @@ public class RomanianHolidayGraph {
 				}
 
 				// find least cost fringe in frontier
-				ArrayList<City> least = RomaninaHolidayUtilities.leastCostFrontierG(frontier);
+				ArrayList<City> least = RomanianHolidayUtilities.leastCostFrontierG(frontier);
 //				System.out.println("\t\t\tEXPAND: " + least);
 
 				// expand that fringe
@@ -95,7 +95,7 @@ public class RomanianHolidayGraph {
 			runInformation.add(Integer.toString(searchTime.getNano()));
 		} else {
 
-			finalPath.add(RomaninaHolidayUtilities.getCityFromList(root));
+			finalPath.add(RomanianHolidayUtilities.getCityFromList(root));
 			runInformation.add(root);
 			runInformation.add("1");
 			runInformation.add(finalPath.toString());
@@ -120,7 +120,7 @@ public class RomanianHolidayGraph {
 		ArrayList<City> finalPath = new ArrayList<City>();
 		ArrayList<String> runInformation = new ArrayList<String>();
 
-		City currNode = RomaninaHolidayUtilities.getCityFromList(root);
+		City currNode = RomanianHolidayUtilities.getCityFromList(root);
 
 		HashMap<ArrayList<City>, Integer> frontier = new HashMap<ArrayList<City>, Integer>();
 		// add first node of where we're at
@@ -134,7 +134,7 @@ public class RomanianHolidayGraph {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<City>> fringe = RomaninaHolidayUtilities.generateFringeG(neighbors, pathChoice);
+		ArrayList<ArrayList<City>> fringe = RomanianHolidayUtilities.generateFringeG(neighbors, pathChoice);
 		frontier = utils.addToFrontierGreedyBestFirstG(fringe, frontier);
 
 		int nodes = 1;
@@ -154,7 +154,7 @@ public class RomanianHolidayGraph {
 				}
 
 				// find least cost fringe in frontier
-				ArrayList<City> least = RomaninaHolidayUtilities.leastCostFrontierG(frontier);
+				ArrayList<City> least = RomanianHolidayUtilities.leastCostFrontierG(frontier);
 //				System.out.println("\t\t\tEXPAND: " + least);
 
 				// expand that fringe
@@ -182,7 +182,7 @@ public class RomanianHolidayGraph {
 			runInformation.add(Integer.toString(searchTime.getNano()));
 		} else {
 
-			finalPath.add(RomaninaHolidayUtilities.getCityFromList(root));
+			finalPath.add(RomanianHolidayUtilities.getCityFromList(root));
 			runInformation.add(root);
 			runInformation.add("1");
 			runInformation.add(finalPath.toString());
@@ -211,7 +211,7 @@ public class RomanianHolidayGraph {
 		ArrayList<City> finalPath = new ArrayList<City>();
 		ArrayList<String> runInformation = new ArrayList<String>();
 
-		City currNode = RomaninaHolidayUtilities.getCityFromList(root);
+		City currNode = RomanianHolidayUtilities.getCityFromList(root);
 
 		HashMap<ArrayList<City>, Integer> frontier = new HashMap<ArrayList<City>, Integer>();
 		// add first node of where we're at
@@ -225,7 +225,7 @@ public class RomanianHolidayGraph {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<City>> fringe = RomaninaHolidayUtilities.generateFringeG(neighbors, pathChoice);
+		ArrayList<ArrayList<City>> fringe = RomanianHolidayUtilities.generateFringeG(neighbors, pathChoice);
 		frontier = utils.addToFrontierG(fringe, frontier);
 
 		int nodes = 1;
@@ -245,7 +245,7 @@ public class RomanianHolidayGraph {
 				}
 
 				// find least cost fringe in frontier
-				ArrayList<City> least = RomaninaHolidayUtilities.leastCostFrontierG(frontier);
+				ArrayList<City> least = RomanianHolidayUtilities.leastCostFrontierG(frontier);
 //				System.out.println("\t\t\tEXPAND: " + least);
 
 				// expand that fringe
@@ -272,7 +272,7 @@ public class RomanianHolidayGraph {
 			runInformation.add(Integer.toString(searchTime.getNano()));
 		} else {
 
-			finalPath.add(RomaninaHolidayUtilities.getCityFromList(root));
+			finalPath.add(RomanianHolidayUtilities.getCityFromList(root));
 			runInformation.add(root);
 			runInformation.add("1");
 			runInformation.add(finalPath.toString());

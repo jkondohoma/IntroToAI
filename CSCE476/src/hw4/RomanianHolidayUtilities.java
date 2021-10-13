@@ -5,14 +5,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-public class RomaninaHolidayUtilities {
+public class RomanianHolidayUtilities {
 	private static  ArrayList<City> allCities = FileParser.getCities();
 	private static HashMap<String, HashMap<String, Integer>> allCitiesHash = FileParser.getCitiesHash(allCities);
 	
-	public RomaninaHolidayUtilities() {
+	public RomanianHolidayUtilities() {
 		
-		RomaninaHolidayUtilities.allCities = FileParser.getCities();
-		RomaninaHolidayUtilities.allCitiesHash = FileParser.getCitiesHash(allCities);
+		RomanianHolidayUtilities.allCities = FileParser.getCities();
+		RomanianHolidayUtilities.allCitiesHash = FileParser.getCitiesHash(allCities);
 
 	}
 
@@ -546,7 +546,7 @@ public class RomaninaHolidayUtilities {
 	 * @return
 	 */
 
-	private static Entry<String, HashMap<String, Integer>> getCityFromHtable(String city) {
+	public static Entry<String, HashMap<String, Integer>> getCityFromHtable(String city) {
 		Entry<String, HashMap<String, Integer>> structure = null;
 		for (Entry<String, HashMap<String, Integer>> entry : allCitiesHash.entrySet()) {
 			String key = entry.getKey();
@@ -592,8 +592,6 @@ public class RomaninaHolidayUtilities {
 		for (Entry<String, HashMap<String, Integer>> entry : allCitiesHash.entrySet()) {
 			String key = entry.getKey();
 			HashMap<String, Integer> value = entry.getValue();
-
-			System.out.println(value);
 
 			for (Entry<String, Integer> cities : value.entrySet()) {
 
