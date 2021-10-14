@@ -106,7 +106,12 @@ public class RomanianHolidayTest {
 			HashMap<String, Integer> neighbors = RomanianHolidayUtilities.neighborsWithinD(cities.get(cityOne), km);
 			System.out.println("\tCity: " + cities.get(cityOne));
 			System.out.println("\tNieghbors within " + km + " km");
-			System.out.println("\t" + neighbors);
+			if (neighbors.isEmpty()) {
+				System.out.println("\tNONE");
+			} else {
+				System.out.println("\t" + neighbors);
+			}
+			
 
 			System.out.println();
 

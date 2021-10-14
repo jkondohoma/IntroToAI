@@ -1,5 +1,7 @@
 package hw4;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DisplaySearch {
@@ -13,6 +15,11 @@ public class DisplaySearch {
 	 */
 	public static void displaySearchResult(ArrayList<String> cities, String search) {
 
+		StringBuilder sb = new StringBuilder();
+		ArrayList<String> runInfo = new ArrayList<String>();
+		String fileName = "";
+
+		sb.append("City Name,#nodes visisted,Path to Bucharest,Total cost of path,CPU time\n");
 		switch (search) {
 
 		case "UCST":
@@ -28,9 +35,12 @@ public class DisplaySearch {
 
 			for (int i = 0; i < cities.size(); i++) {
 				RomanianHolidayTree treeRun = new RomanianHolidayTree();
-				ArrayList<String> runInfo1 = treeRun.uniformCostSearch(cities.get(i));
-
-				displayRunInformation(runInfo1);
+				runInfo = treeRun.uniformCostSearch(cities.get(i));
+				String path = runInfo.get(2).replace(',', ';');
+				sb.append(runInfo.get(0) + "," + runInfo.get(1) + "," + path + "," + runInfo.get(3) + ","
+						+ runInfo.get(4) + "\n");
+				fileName = "uniformCostTreeSearch.csv";
+				displayRunInformation(runInfo);
 
 			}
 			break;
@@ -48,9 +58,12 @@ public class DisplaySearch {
 
 			for (int i = 0; i < cities.size(); i++) {
 				RomanianHolidayGraph graphRun = new RomanianHolidayGraph();
-				ArrayList<String> runInfo2 = graphRun.uniformCostSearch(cities.get(i));
-
-				displayRunInformation(runInfo2);
+				runInfo = graphRun.uniformCostSearch(cities.get(i));
+				String path = runInfo.get(2).replace(',', ';');
+				sb.append(runInfo.get(0) + "," + runInfo.get(1) + "," + path + "," + runInfo.get(3) + ","
+						+ runInfo.get(4) + "\n");
+				fileName = "uniformCostGraphSearch.csv";
+				displayRunInformation(runInfo);
 
 			}
 			break;
@@ -69,7 +82,11 @@ public class DisplaySearch {
 
 			for (int i = 0; i < cities.size(); i++) {
 				RomanianHolidayTree treeRun = new RomanianHolidayTree();
-				ArrayList<String> runInfo = treeRun.aStarBestFirstSearch(cities.get(i));
+				runInfo = treeRun.aStarBestFirstSearch(cities.get(i));
+				String path = runInfo.get(2).replace(',', ';');
+				sb.append(runInfo.get(0) + "," + runInfo.get(1) + "," + path + "," + runInfo.get(3) + ","
+						+ runInfo.get(4) + "\n");
+				fileName = "bestFirstAstarTreeSearch.csv";
 				displayRunInformation(runInfo);
 
 			}
@@ -90,7 +107,11 @@ public class DisplaySearch {
 
 			for (int i = 0; i < cities.size(); i++) {
 				RomanianHolidayGraph graphRun = new RomanianHolidayGraph();
-				ArrayList<String> runInfo = graphRun.aStarBestFirstSearch(cities.get(i));
+				runInfo = graphRun.aStarBestFirstSearch(cities.get(i));
+				String path = runInfo.get(2).replace(',', ';');
+				sb.append(runInfo.get(0) + "," + runInfo.get(1) + "," + path + "," + runInfo.get(3) + ","
+						+ runInfo.get(4) + "\n");
+				fileName = "bestFirstAstarGraphSearch.csv";
 				displayRunInformation(runInfo);
 
 			}
@@ -110,9 +131,12 @@ public class DisplaySearch {
 					"________________________________________________________________________________________________________________________________________________________");
 			for (int i = 0; i < cities.size(); i++) {
 				RomanianHolidayGraph graphRun = new RomanianHolidayGraph();
-				ArrayList<String> runInfo3 = graphRun.greedyBestFirstSearch(cities.get(i));
-
-				displayRunInformation(runInfo3);
+				runInfo = graphRun.greedyBestFirstSearch(cities.get(i));
+				String path = runInfo.get(2).replace(',', ';');
+				sb.append(runInfo.get(0) + "," + runInfo.get(1) + "," + path + "," + runInfo.get(3) + ","
+						+ runInfo.get(4) + "\n");
+				fileName = "greedyBestFirstGraphSearch.csv";
+				displayRunInformation(runInfo);
 
 			}
 			break;
@@ -130,9 +154,12 @@ public class DisplaySearch {
 					"________________________________________________________________________________________________________________________________________________________");
 			for (int i = 0; i < cities.size(); i++) {
 				RomanianHolidayTree treeRun = new RomanianHolidayTree();
-				ArrayList<String> runInfo3 = treeRun.greedyBestFirstSearch(cities.get(i));
-
-				displayRunInformation(runInfo3);
+				runInfo = treeRun.greedyBestFirstSearch(cities.get(i));
+				String path = runInfo.get(2).replace(',', ';');
+				sb.append(runInfo.get(0) + "," + runInfo.get(1) + "," + path + "," + runInfo.get(3) + ","
+						+ runInfo.get(4) + "\n");
+				fileName = "greedyBestFirstTreeSearch.csv";
+				displayRunInformation(runInfo);
 
 			}
 			break;
@@ -144,7 +171,16 @@ public class DisplaySearch {
 
 		}
 
-		System.out.println("\n\n");
+		sb.append("\n\n");
+
+		try {
+			FileWriter w = new FileWriter("data/" + fileName);
+			w.write(sb.toString());
+			w.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
 
 	}
 

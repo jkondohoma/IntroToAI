@@ -45,7 +45,7 @@ public class City implements Comparable<City> {
 	}
 
 	public String display() {
-		return "City [name=" + name + ", neighboors=" + neighboors + ", visited=" + visited + ", h=" + h + "]";
+		return "City [name=" + name + ", neighboors=" + neighboors + ", h=" + h + "]";
 	}
 
 	@Override

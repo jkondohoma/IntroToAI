@@ -23,19 +23,18 @@ public class Problem4 {
 		Collections.sort(cities);
 		Collections.sort(cityObjects);
 
-
-//		DisplaySearch.displaySearchResult(cities, "UCST"); //Uniform Cost Tree Search (Uninformed)
-//		DisplaySearch.displaySearchResult(cities, "UCSG"); // Uniform Cost Graph Search (Uninformed)
-//		DisplaySearch.displaySearchResult(cities, "GRDT");//Greedy Best First Tree Search
-//		DisplaySearch.displaySearchResult(cities, "GRDG"); // Greedy Best First Graph Search
-//		DisplaySearch.displaySearchResult(cities, "A*T"); //Best First A* Tree Search
-//		DisplaySearch.displaySearchResult(cities, "A*G"); // Best First A* Graph Search
-//		System.out.println();
-//		
+		DisplaySearch.displaySearchResult(cities, "UCST"); // Uniform Cost Tree Search (Uninformed)
+		DisplaySearch.displaySearchResult(cities, "UCSG"); // Uniform Cost Graph Search (Uninformed)
+		DisplaySearch.displaySearchResult(cities, "GRDT");// Greedy Best First Tree Search
+		DisplaySearch.displaySearchResult(cities, "GRDG"); // Greedy Best First Graph Search
+		DisplaySearch.displaySearchResult(cities, "A*T"); // Best First A* Tree Search
+		DisplaySearch.displaySearchResult(cities, "A*G"); // Best First A* Graph Search
+		System.out.println();
+	
 		int cityOneIndex = 0;
-		int cityTwoIndex = -5;
-		int km = -4;
-		RomanianHolidayTest.testFunctions(cities, cityObjects, cityOneIndex, cityTwoIndex, km);
+		int cityTwoIndex = 7;
+		int km = 204;
+//		RomanianHolidayTest.testFunctions(cities, cityObjects, cityOneIndex, cityTwoIndex, km);
 
 
 	}
