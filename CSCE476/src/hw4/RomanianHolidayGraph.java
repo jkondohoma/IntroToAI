@@ -1,4 +1,3 @@
-package hw4;
 
 import java.time.Duration;
 import java.time.Instant;

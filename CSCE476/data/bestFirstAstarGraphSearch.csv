@@ -1,23 +1,23 @@
 City Name,#nodes visisted,Path to Bucharest,Total cost of path,CPU time
-Arad,6,[Arad; Sibiu; Rimnicu Vilcea; Pitesti; Bucharest],418,328000
+Arad,6,[Arad; Sibiu; Rimnicu Vilcea; Pitesti; Bucharest],418,148000
 Bucharest,1,[Bucharest],0,0
-Craiova,3,[Craiova; Pitesti; Bucharest],239,66000
-Dobreta,5,[Dobreta; Craiova; Pitesti; Bucharest],359,150000
-Eforie,4,[Eforie; Hirsova; Urziceni; Bucharest],269,114000
-Fagaras,2,[Fagaras; Bucharest],211,36000
-Giurgiu,2,[Giurgiu; Bucharest],90,44000
-Hirsova,3,[Hirsova; Urziceni; Bucharest],183,75000
-Iasi,4,[Iasi; Vaslui; Urziceni; Bucharest],319,114000
-Lugoj,8,[Lugoj; Mehadia; Dobreta; Craiova; Pitesti; Bucharest],504,225000
-Mehadia,6,[Mehadia; Dobreta; Craiova; Pitesti; Bucharest],434,191000
-Neamt,5,[Neamt; Iasi; Vaslui; Urziceni; Bucharest],411,157000
-Oradea,6,[Oradea; Sibiu; Rimnicu Vilcea; Pitesti; Bucharest],429,222000
-Pitesti,2,[Pitesti; Bucharest],101,39000
-Rimnicu Vilcea,3,[Rimnicu Vilcea; Pitesti; Bucharest],198,70000
-Sibiu,5,[Sibiu; Rimnicu Vilcea; Pitesti; Bucharest],278,142000
-Timisoara,12,[Timisoara; Arad; Sibiu; Rimnicu Vilcea; Pitesti; Bucharest],536,283000
-Urziceni,2,[Urziceni; Bucharest],85,34000
-Vaslui,3,[Vaslui; Urziceni; Bucharest],227,77000
-Zerind,9,[Zerind; Arad; Sibiu; Rimnicu Vilcea; Pitesti; Bucharest],493,363000
+Craiova,3,[Craiova; Pitesti; Bucharest],239,56000
+Dobreta,5,[Dobreta; Craiova; Pitesti; Bucharest],359,92000
+Eforie,4,[Eforie; Hirsova; Urziceni; Bucharest],269,77000
+Fagaras,2,[Fagaras; Bucharest],211,25000
+Giurgiu,2,[Giurgiu; Bucharest],90,26000
+Hirsova,3,[Hirsova; Urziceni; Bucharest],183,48000
+Iasi,4,[Iasi; Vaslui; Urziceni; Bucharest],319,75000
+Lugoj,8,[Lugoj; Mehadia; Dobreta; Craiova; Pitesti; Bucharest],504,162000
+Mehadia,6,[Mehadia; Dobreta; Craiova; Pitesti; Bucharest],434,127000
+Neamt,5,[Neamt; Iasi; Vaslui; Urziceni; Bucharest],411,99000
+Oradea,6,[Oradea; Sibiu; Rimnicu Vilcea; Pitesti; Bucharest],429,143000
+Pitesti,2,[Pitesti; Bucharest],101,25000
+Rimnicu Vilcea,3,[Rimnicu Vilcea; Pitesti; Bucharest],198,55000
+Sibiu,5,[Sibiu; Rimnicu Vilcea; Pitesti; Bucharest],278,115000
+Timisoara,12,[Timisoara; Arad; Sibiu; Rimnicu Vilcea; Pitesti; Bucharest],536,318000
+Urziceni,2,[Urziceni; Bucharest],85,36000
+Vaslui,3,[Vaslui; Urziceni; Bucharest],227,74000
+Zerind,9,[Zerind; Arad; Sibiu; Rimnicu Vilcea; Pitesti; Bucharest],493,303000
 
 
