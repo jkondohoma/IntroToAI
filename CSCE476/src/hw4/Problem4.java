@@ -34,7 +34,12 @@ public class Problem4 {
 		int cityOneIndex = 0;
 		int cityTwoIndex = 7;
 		int km = 204;
-//		RomanianHolidayTest.testFunctions(cities, cityObjects, cityOneIndex, cityTwoIndex, km);
+		RomanianHolidayTest tasks = new RomanianHolidayTest();
+		RomanianHolidayUtilities utils = new RomanianHolidayUtilities();
+		tasks.testFunctions(cities, cityObjects, cityOneIndex, cityTwoIndex, km);
+		
+//		RomanianHolidayUtilities.allCitiesFromHtable();
+
 
 
 	}

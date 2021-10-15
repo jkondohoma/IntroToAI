@@ -50,7 +50,7 @@ public class RomanianHolidayTree {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<String>> fringe = RomanianHolidayUtilities.generateFringe(neighbors, pathChoice);
+		ArrayList<ArrayList<String>> fringe = utils.generateFringe(neighbors, pathChoice);
 		frontier = RomanianHolidayUtilities.addToFrontier(fringe, frontier);
 
 		int nodes = 1;
@@ -132,7 +132,7 @@ public class RomanianHolidayTree {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<String>> fringe = RomanianHolidayUtilities.generateFringe(neighbors, pathChoice);
+		ArrayList<ArrayList<String>> fringe = utils.generateFringe(neighbors, pathChoice);
 		frontier = RomanianHolidayUtilities.addToFrontierGreedyBestFirst(fringe, frontier);
 
 		int nodes = 1;
@@ -157,7 +157,7 @@ public class RomanianHolidayTree {
 				// expand that fringe
 				currNode = least.get(least.size() - 1);
 				frontier = new HashMap<ArrayList<String>, Integer>(
-						RomanianHolidayUtilities.expandGreedyBestFirst(currNode, least, frontier));
+						utils.expandGreedyBestFirst(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
 				nodes++;
@@ -216,7 +216,7 @@ public class RomanianHolidayTree {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<String>> fringe = RomanianHolidayUtilities.generateFringe(neighbors, pathChoice);
+		ArrayList<ArrayList<String>> fringe = utils.generateFringe(neighbors, pathChoice);
 		frontier = RomanianHolidayUtilities.addToFrontierStarSearch(fringe, frontier);
 
 		int nodes = 1;
@@ -241,7 +241,7 @@ public class RomanianHolidayTree {
 				// expand that fringe
 				currNode = least.get(least.size() - 1);
 				frontier = new HashMap<ArrayList<String>, Integer>(
-						RomanianHolidayUtilities.expandStarSearch(currNode, least, frontier));
+						utils.expandStarSearch(currNode, least, frontier));
 
 //				System.out.println("_________________________________________________________________");
 				nodes++;

@@ -47,7 +47,7 @@ public class RomanianHolidayGraph {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<City>> fringe = RomanianHolidayUtilities.generateFringeG(neighbors, pathChoice);
+		ArrayList<ArrayList<City>> fringe = utils.generateFringeG(neighbors, pathChoice);
 		frontier = utils.addToFrontierStarSearchG(fringe, frontier);
 
 		int nodes = 1;
@@ -134,7 +134,7 @@ public class RomanianHolidayGraph {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<City>> fringe = RomanianHolidayUtilities.generateFringeG(neighbors, pathChoice);
+		ArrayList<ArrayList<City>> fringe = utils.generateFringeG(neighbors, pathChoice);
 		frontier = utils.addToFrontierGreedyBestFirstG(fringe, frontier);
 
 		int nodes = 1;
@@ -225,7 +225,7 @@ public class RomanianHolidayGraph {
 //		System.out.printf("%s | %-12s | %s \n", "Location", "Choices", "Cost");
 //		System.out.println("_________________________________________________________________");
 
-		ArrayList<ArrayList<City>> fringe = RomanianHolidayUtilities.generateFringeG(neighbors, pathChoice);
+		ArrayList<ArrayList<City>> fringe = utils.generateFringeG(neighbors, pathChoice);
 		frontier = utils.addToFrontierG(fringe, frontier);
 
 		int nodes = 1;

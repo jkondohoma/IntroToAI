@@ -1,23 +1,23 @@
 City Name,#nodes visisted,Path to Bucharest,Total cost of path,CPU time
-Arad,4,[Arad; Sibiu; Fagaras; Bucharest],450,46000
+Arad,4,[Arad; Sibiu; Fagaras; Bucharest],450,53000
 Bucharest,1,[Bucharest],0,0
-Craiova,3,[Craiova; Pitesti; Bucharest],239,29000
-Dobreta,4,[Dobreta; Craiova; Pitesti; Bucharest],359,61000
-Eforie,4,[Eforie; Hirsova; Urziceni; Bucharest],269,41000
-Fagaras,2,[Fagaras; Bucharest],211,18000
-Giurgiu,2,[Giurgiu; Bucharest],90,21000
-Hirsova,3,[Hirsova; Urziceni; Bucharest],183,28000
-Iasi,4,[Iasi; Vaslui; Urziceni; Bucharest],319,35000
-Lugoj,6,[Lugoj; Mehadia; Dobreta; Craiova; Pitesti; Bucharest],504,59000
-Mehadia,5,[Mehadia; Dobreta; Craiova; Pitesti; Bucharest],434,47000
-Neamt,5,[Neamt; Iasi; Vaslui; Urziceni; Bucharest],411,42000
-Oradea,4,[Oradea; Sibiu; Fagaras; Bucharest],461,40000
-Pitesti,2,[Pitesti; Bucharest],101,20000
-Rimnicu Vilcea,3,[Rimnicu Vilcea; Pitesti; Bucharest],198,53000
-Sibiu,3,[Sibiu; Fagaras; Bucharest],310,25000
-Timisoara,7,[Timisoara; Lugoj; Mehadia; Dobreta; Craiova; Pitesti; Bucharest],615,63000
-Urziceni,2,[Urziceni; Bucharest],85,26000
-Vaslui,3,[Vaslui; Urziceni; Bucharest],227,34000
-Zerind,5,[Zerind; Arad; Sibiu; Fagaras; Bucharest],525,53000
+Craiova,3,[Craiova; Pitesti; Bucharest],239,47000
+Dobreta,4,[Dobreta; Craiova; Pitesti; Bucharest],359,51000
+Eforie,4,[Eforie; Hirsova; Urziceni; Bucharest],269,53000
+Fagaras,2,[Fagaras; Bucharest],211,51000
+Giurgiu,2,[Giurgiu; Bucharest],90,38000
+Hirsova,3,[Hirsova; Urziceni; Bucharest],183,76000
+Iasi,4,[Iasi; Vaslui; Urziceni; Bucharest],319,44000
+Lugoj,6,[Lugoj; Mehadia; Dobreta; Craiova; Pitesti; Bucharest],504,113000
+Mehadia,5,[Mehadia; Dobreta; Craiova; Pitesti; Bucharest],434,77000
+Neamt,5,[Neamt; Iasi; Vaslui; Urziceni; Bucharest],411,55000
+Oradea,4,[Oradea; Sibiu; Fagaras; Bucharest],461,46000
+Pitesti,2,[Pitesti; Bucharest],101,30000
+Rimnicu Vilcea,3,[Rimnicu Vilcea; Pitesti; Bucharest],198,51000
+Sibiu,3,[Sibiu; Fagaras; Bucharest],310,46000
+Timisoara,7,[Timisoara; Lugoj; Mehadia; Dobreta; Craiova; Pitesti; Bucharest],615,97000
+Urziceni,2,[Urziceni; Bucharest],85,25000
+Vaslui,3,[Vaslui; Urziceni; Bucharest],227,38000
+Zerind,5,[Zerind; Arad; Sibiu; Fagaras; Bucharest],525,77000
 
 

@@ -14,7 +14,7 @@ public class RomanianHolidayTest {
 	 * @param cityTwo
 	 * @param km
 	 */
-	public static void testFunctions(ArrayList<String> cities, ArrayList<City> cityObjects, int cityOne, int cityTwo,
+	public void testFunctions(ArrayList<String> cities, ArrayList<City> cityObjects, int cityOne, int cityTwo,
 			int km) {
 
 		if ((cityOne < 0 )|| (cityOne > (cities.size() - 1))) {
@@ -50,7 +50,7 @@ public class RomanianHolidayTest {
 			System.out.println("2. Write a function allCitiesFromList that takes a global variable,\n"
 
 					+ "  allCitiesList, and returns a list of all names of cities on the map. \n");
-			for (String s : cities) {
+			for (String s : RomanianHolidayUtilities.allCitiesFromList()) {
 				System.out.println("\t" + s);
 			}
 			System.out.println();

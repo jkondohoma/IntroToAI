@@ -100,7 +100,7 @@ public class RomanianHolidayUtilities {
 	 * @return
 	 */
 
-	public static ArrayList<ArrayList<String>> generateFringe(HashMap<String, Integer> neighbors,
+	public ArrayList<ArrayList<String>> generateFringe(HashMap<String, Integer> neighbors,
 			ArrayList<String> pathChoice) {
 
 		ArrayList<ArrayList<String>> fringe = new ArrayList<ArrayList<String>>();
@@ -115,8 +115,7 @@ public class RomanianHolidayUtilities {
 		return fringe;
 	}
 
-	public static ArrayList<ArrayList<City>> generateFringeG(HashMap<City, Integer> neighbors,
-			ArrayList<City> pathChoice) {
+	public ArrayList<ArrayList<City>> generateFringeG(HashMap<City, Integer> neighbors, ArrayList<City> pathChoice) {
 
 		ArrayList<ArrayList<City>> fringe = new ArrayList<ArrayList<City>>();
 
@@ -289,7 +288,7 @@ public class RomanianHolidayUtilities {
 	 * @param frontier
 	 * @return
 	 */
-	public static HashMap<ArrayList<String>, Integer> expandGreedyBestFirst(String toExpand, ArrayList<String> least,
+	public HashMap<ArrayList<String>, Integer> expandGreedyBestFirst(String toExpand, ArrayList<String> least,
 			HashMap<ArrayList<String>, Integer> frontier) {
 		HashMap<ArrayList<String>, Integer> newFrontier = new HashMap<ArrayList<String>, Integer>();
 
@@ -326,7 +325,7 @@ public class RomanianHolidayUtilities {
 	 * @param frontier
 	 * @return
 	 */
-	public static HashMap<ArrayList<String>, Integer> expandStarSearch(String toExpand, ArrayList<String> least,
+	public HashMap<ArrayList<String>, Integer> expandStarSearch(String toExpand, ArrayList<String> least,
 			HashMap<ArrayList<String>, Integer> frontier) {
 		HashMap<ArrayList<String>, Integer> newFrontier = new HashMap<ArrayList<String>, Integer>();
 
@@ -439,6 +438,14 @@ public class RomanianHolidayUtilities {
 		return dist;
 	}
 
+	/**
+	 * takes the name of two cities cityOne and cityTwo, and returns the distance
+	 * between them if they are directly connected or nil if they are not
+	 * 
+	 * @param cityOne
+	 * @param cityTwo
+	 * @return
+	 */
 	private int neighborsP(City cityOne, City cityTwo) {
 		int dist = 0;
 		HashMap<City, Integer> neighbors = getNeighboors(cityOne);
@@ -464,9 +471,13 @@ public class RomanianHolidayUtilities {
 
 	public static HashMap<String, Integer> neighborsWithinD(String myCity, int distance) {
 		HashMap<String, Integer> neighbors = new HashMap<String, Integer>();
-		City city = getCityFromList(myCity);
 
-		for (Entry<String, Integer> entry : city.getNeighboors().entrySet()) {
+		Entry<String, HashMap<String, Integer>> city = getCityFromHtable(myCity); // this function uses allCitiesHash
+
+		HashMap<String, Integer> everyNeighbor = city.getValue();
+
+		for (Entry<String, Integer> entry : everyNeighbor.entrySet()) {
+
 			String cite = entry.getKey();
 			int dist = entry.getValue();
 			if (distance <= dist) {
@@ -528,10 +539,8 @@ public class RomanianHolidayUtilities {
 	public static City getCityFromList(String input) {
 
 		City structure = null;
-//		System.out.println(input);
 		for (City city : allCities) {
 			if (city.getName().equals(input)) {
-//				System.out.println("YES");
 				structure = city;
 
 			}
