@@ -1,4 +1,3 @@
-package hw4;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,19 +13,18 @@ public class RomanianHolidayTest {
 	 * @param cityTwo
 	 * @param km
 	 */
-	public void testFunctions(ArrayList<String> cities, ArrayList<City> cityObjects, int cityOne, int cityTwo,
-			int km) {
+	public void testFunctions(ArrayList<String> cities, ArrayList<City> cityObjects, int cityOne, int cityTwo, int km) {
 
-		if ((cityOne < 0 )|| (cityOne > (cities.size() - 1))) {
+		if ((cityOne < 0) || (cityOne > (cities.size() - 1))) {
 			System.out.println("In cities list index " + cityOne + " does not exist");
 			System.out.println("Index must be betwee 0 and 19");
-			
-		} else if ((cityTwo < 0 )|| (cityTwo > (cities.size() - 1))) {
+
+		} else if ((cityTwo < 0) || (cityTwo > (cities.size() - 1))) {
 			System.out.println("In cities list index " + cityTwo + " does not exist");
-			System.out.println("Index must be betwee 0 and " +( cities.size()-1));
-		}  else if(km<0){
+			System.out.println("Index must be betwee 0 and " + (cities.size() - 1));
+		} else if (km < 0) {
 			System.out.println("Distance between neighbors must be a positive interger");
-		}else {
+		} else {
 
 			RomanianHolidayGraph graphRun = new RomanianHolidayGraph();
 			ArrayList<String> runInfo = graphRun.uniformCostSearch(cityObjects.get(cityOne).getName());
@@ -71,8 +69,8 @@ public class RomanianHolidayTest {
 					+ "  city as input and return the corresponding structure (by accessing a variable, allCitiesList and\n"
 					+ "  allCitiesHtable, respectively).\n");
 			City fromList = RomanianHolidayUtilities.getCityFromList(cities.get(cityOne));
-			Entry<String, HashMap<String, Integer>> fromHtable = RomanianHolidayUtilities
-					.getCityFromHtable(cities.get(cityOne));
+			Entry<String, HashMap<City, Integer>> fromHtable = RomanianHolidayUtilities
+					.getCityFromHtableObject(cities.get(cityOne));
 
 			System.out.println("\tCity: " + cities.get(cityOne));
 			System.out.println("\t\tValue in allCitiesList");
@@ -87,13 +85,17 @@ public class RomanianHolidayTest {
 					+ "  of a city as input and return the list of structures of its direct neighbors. neighborsUsingList and\n"
 					+ "  neighborsUsingHtable should use getCityFromList and getCityFromHtable, respectively. \n");
 
-			ArrayList<String> neighborsList = RomanianHolidayUtilities.neighborsUsingList(cities.get(cityOne));
-			ArrayList<String> neighborsHTable = RomanianHolidayUtilities.neighborsUsingHtable(cities.get(cityOne));
+			ArrayList<City> neighborsList = RomanianHolidayUtilities.neighborsUsingList(cities.get(cityOne));
+			ArrayList<City> neighborsHTable = RomanianHolidayUtilities.neighborsUsingHtable(cities.get(cityOne));
 			System.out.println("\tCity: " + cities.get(cityOne));
 			System.out.println("\t\tNeighbors using list");
-			System.out.println("\t\t" + neighborsList + "\n");
-			System.out.println("\t\tNeighbors using hash table");
-			System.out.println("\t\t" + neighborsHTable);
+			for (int i = 0; i < neighborsList.size(); i++) {
+				System.out.println("\t\t" + neighborsList.get(i).display());
+			}
+			System.out.println("\n\t\tNeighbors using hash table");
+			for (int i = 0; i < neighborsHTable.size(); i++) {
+				System.out.println("\t\t" + neighborsHTable.get(i).display());
+			}
 
 			System.out.println();
 
@@ -103,15 +105,16 @@ public class RomanianHolidayTest {
 							+ "  myCity and a number distance, then returns, for all direct neighbors within distance from myCity\n"
 							+ "  (less than or equal), an association list of the structures of the neighbors of myCity and their distance to myCity. \n");
 
-			HashMap<String, Integer> neighbors = RomanianHolidayUtilities.neighborsWithinD(cities.get(cityOne), km);
+			HashMap<City, Integer> neighbors = RomanianHolidayUtilities.neighborsWithinD(cities.get(cityOne), km);
 			System.out.println("\tCity: " + cities.get(cityOne));
 			System.out.println("\tNieghbors within " + km + " km");
 			if (neighbors.isEmpty()) {
 				System.out.println("\tNONE");
 			} else {
+
 				System.out.println("\t" + neighbors);
+
 			}
-			
 
 			System.out.println();
 

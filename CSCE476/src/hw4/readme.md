@@ -15,9 +15,9 @@ Data structures:
 Task 4.1.1 (RomanianHolidayTest.java)
 --------------------------------------------
 I created a function that automates the testing of functionality of tasks 1-7. The function takes in an array list of city names, array list of city structures (objects), index of a city in the list, index of another city in the, and distance value in km list (this second city and distance value is used for task 7). 
-* If you want to run all 7 tasks at once you can do so my using *tasks.testFunctions(cities, cityObjects, cityOneIndex,cityTwoIndex, km) [line 37 in Problem4.java]*
+* If you want to run all 7 tasks at once you can do so my using *tasks.testFunctions(cities, cityObjects, cityOneIndex,cityTwoIndex, km) [line 35 in Problem4.java]*
 
-* if you want to run one function at a time you can comment out line 37 in *Problem4.java* and call each individual function using functions in *RomanianHolidayUtilities.functionName()* where function name is the name of the required function as stated in the assignment handout.
+* if you want to run one function at a time you can comment out line 35 in *Problem4.java* and call each individual function using functions in *RomanianHolidayUtilities.functionName()* where function name is the name of the required function as stated in the assignment handout.
 
 Functions used for task 4.1.1 (RomanianHolidayUtils.java):
 --------------------------------------------

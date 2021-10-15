@@ -1,9 +1,6 @@
-package hw4;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 /**
  * Report the results of graph search and tree search applied to each city in
@@ -33,12 +30,10 @@ public class Problem4 {
 	
 		int cityOneIndex = 0;
 		int cityTwoIndex = 7;
-		int km = 204;
+		int km = 76;
 		RomanianHolidayTest tasks = new RomanianHolidayTest();
-		RomanianHolidayUtilities utils = new RomanianHolidayUtilities();
 		tasks.testFunctions(cities, cityObjects, cityOneIndex, cityTwoIndex, km);
-		
-//		RomanianHolidayUtilities.allCitiesFromHtable();
+
 
 
 

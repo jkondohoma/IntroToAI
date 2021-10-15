@@ -1,5 +1,4 @@
 package hw4;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,6 +7,7 @@ import java.util.Map.Entry;
 public class RomanianHolidayUtilities {
 	private static ArrayList<City> allCities = FileParser.getCities();
 	private static HashMap<String, HashMap<String, Integer>> allCitiesHash = FileParser.getCitiesHash(allCities);
+	private static HashMap<String, HashMap<City, Integer>> allCitiesHashObject = FileParser.getCitiesHashObject(allCities);
 
 	public RomanianHolidayUtilities() {
 
@@ -469,8 +469,8 @@ public class RomanianHolidayUtilities {
 	 * @return
 	 */
 
-	public static HashMap<String, Integer> neighborsWithinD(String myCity, int distance) {
-		HashMap<String, Integer> neighbors = new HashMap<String, Integer>();
+	public static HashMap<City, Integer> neighborsWithinD(String myCity, int distance) {
+		HashMap<City, Integer> neighbors = new HashMap<City, Integer>();
 
 		Entry<String, HashMap<String, Integer>> city = getCityFromHtable(myCity); // this function uses allCitiesHash
 
@@ -481,7 +481,7 @@ public class RomanianHolidayUtilities {
 			String cite = entry.getKey();
 			int dist = entry.getValue();
 			if (distance <= dist) {
-				neighbors.put(cite, dist);
+				neighbors.put(getCityFromList(cite), dist);
 			}
 
 		}
@@ -497,13 +497,13 @@ public class RomanianHolidayUtilities {
 	 * @return
 	 */
 
-	public static ArrayList<String> neighborsUsingHtable(String city) {
-		ArrayList<String> neighbors = new ArrayList<String>();
+	public static ArrayList<City> neighborsUsingHtable(String city) {
+		ArrayList<City> neighbors = new ArrayList<City>();
 
 		Entry<String, HashMap<String, Integer>> struct = getCityFromHtable(city);
 
 		for (Entry<String, Integer> entry : struct.getValue().entrySet()) {
-			neighbors.add(entry.getKey());
+			neighbors.add(getCityFromList(entry.getKey()));
 
 		}
 
@@ -517,11 +517,11 @@ public class RomanianHolidayUtilities {
 	 * 
 	 * @param city
 	 */
-	public static ArrayList<String> neighborsUsingList(String city) {
-		ArrayList<String> neighbors = new ArrayList<String>();
+	public static ArrayList<City> neighborsUsingList(String city) {
+		ArrayList<City> neighbors = new ArrayList<City>();
 
 		for (Entry<String, Integer> entry : getCityFromList(city).getNeighboors().entrySet()) {
-			neighbors.add(entry.getKey());
+			neighbors.add(getCityFromList(entry.getKey()));
 
 		}
 
@@ -564,6 +564,28 @@ public class RomanianHolidayUtilities {
 			String key = entry.getKey();
 
 			if (city.equals(key)) {
+				structure = entry;
+			}
+
+		}
+		return structure;
+
+	}
+	
+	/**
+	 * take the name of a city as input and return the corresponding structure from
+	 * allCities hash table
+	 * 
+	 * @param city
+	 * @return
+	 */
+	public static Entry<String, HashMap<City, Integer>> getCityFromHtableObject(String city) {
+		Entry<String, HashMap<City, Integer>> structure = null;
+		for (Entry<String, HashMap<City, Integer>> entry : allCitiesHashObject.entrySet()) {
+			String key = entry.getKey();
+
+			if (city.equals(key)) {
+				
 				structure = entry;
 			}
 
